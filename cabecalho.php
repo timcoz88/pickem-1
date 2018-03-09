@@ -59,11 +59,11 @@ não comprimir os elementos(o bootstrap que faz)  -->
 					href="#" id="dropAdmin" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">Admin</a>
 					<div class="dropdown-menu" aria-labelledby="dropAdmin">
-						<a class="dropdown-item" href="../pickem/mngr/users.php">Users</a> <a
-							class="dropdown-item" href="../pickem/mngr/athletes.php">Athletes</a> <a
-							class="dropdown-item" href="../pickem/mngr/competitions.php">Competitions</a>
-						<a class="dropdown-item" href="../pickem/mngr/events.php">Events</a> <a
-							class="dropdown-item" href="../pickem/mngr/groups.php">Groups</a>
+						<a class="dropdown-item" href="mng-users.php">Users</a> <a
+							class="dropdown-item" href="mng-athletes.php">Athletes</a> <a
+							class="dropdown-item" href="mng-competitions.php">Competitions</a>
+						<a class="dropdown-item" href="mng-events.php">Events</a> <a
+							class="dropdown-item" href="mng-groups.php">Groups</a>
 					</div>
 					
 					</li>
