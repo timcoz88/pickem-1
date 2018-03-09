@@ -5,7 +5,7 @@ if (isset($_SESSION['id']) && empty($_SESSION['id']) == false) {
     
     
 } else {
-    require_once ("teste.php");?>
+    require_once ("index-main.php");?>
 <!-- 
 <div class="starter-template">
 	<h1>CF PickEm</h1>

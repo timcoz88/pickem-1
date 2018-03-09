@@ -22,6 +22,7 @@ não comprimir os elementos(o bootstrap que faz)  -->
 <!-- CSS -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
+<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css" />
 
 <title>CFPickEm</title>
 </head>

@@ -1,3 +1,4 @@
+<?php ?>
 <!-- Top content -->
 <div class="top-content">
 
@@ -5,19 +6,19 @@
 		<div class="container">
 
 			<div class="row">
-				<div class="col-sm-8 text-center">
+				<div class="text-center">
 
 					<h1>CF PickEm</h1>
 					<div class="description">
 						<p class=lead>
-							Escrever uma descrição da página<br /> Centralizar essa parte<br />
-							"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-							eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-							enim ad minim veniam, quis nostrud exercitation ullamco laboris
-							nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-							reprehenderit in voluptate velit esse cillum dolore eu fugiat
-							nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-							sunt in culpa qui officia deserunt mollit anim id est laborum."
+							Escrever uma descrição da página<br /> "Lorem ipsum dolor sit
+							amet, consectetur adipiscing elit, sed do eiusmod tempor
+							incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+							veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+							ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+							in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+							officia deserunt mollit anim id est laborum."
 						</p>
 					</div>
 				</div>
@@ -61,6 +62,8 @@
 								class="fa fa-facebook"></i> Facebook
 							</a> <a class="btn btn-link-1 btn-link-1-twitter" href="#"> <i
 								class="fa fa-twitter"></i> Twitter
+							</a> <a class="btn btn-link-1 btn-link-1-google-plus" href="#"> <i
+								class="fa fa-google-plus"></i> Google
 							</a>
 						</div>
 					</div>

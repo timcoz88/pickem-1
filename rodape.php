@@ -1,9 +1,9 @@
 <?php ?>
 </main>
 <!-- /.container -->
-<footer class="bd-footer">
+<footer class="footer">
 
-	<div class="container-fluid">
+	<div class="container">
 
 		<p class="cinza">
 			Designed, built and maintained by <a
@@ -11,11 +11,9 @@
 			with the help of <a
 				href="https://github.com/mademano/pickem/graphs/contributors">our
 				contributors</a>. 
-				<br/>
 				Currently v1.0.0. Code licensed <a
 				href="https://github.com/mademano/pickem/blob/master/LICENSE"
 				target="_blank" rel="license noopener">MIT</a>.
-				<br/>
 				<a href="https://github.com/mademano/pickem">GitHub</a>
 				<a href="https://twitter.com/mademano">Twitter</a>
 		</p>
