@@ -22,8 +22,9 @@ class usuarioDao {
             $tipoUsuario = $usuario_array['tipoUsuario'];
             $ativo = $usuario_array['ativo'];
             $cadastro = $usuario_array['cadastro'];
+            $status = $usuario_array['status'];
             
-            $usuario = new Usuario($email, $senha, $tipoUsuario, $ativo, $cadastro);
+            $usuario = new Usuario($email, $senha, $tipoUsuario, $ativo, $cadastro, $status);
             
             
             $usuario->setId($id);
@@ -73,11 +74,12 @@ class usuarioDao {
         $senha = $usuario->getSenha();
         $tipoUsuario = $usuario->getTipoUsuario();
         $ativo = $usuario->getAtivo();
+        $status = $usuario->getStatus();
         
         
-        $sql = "UPDATE usuarios SET email = ?, senha = ?, tipoUsuario = ?, ativo = ? WHERE id = ?";
+        $sql = "UPDATE usuarios SET email = ?, senha = ?, tipoUsuario = ?, ativo = ?, status = ? WHERE id = ?";
         $sql = $this->conexao->prepare($sql);
-        $sql->execute(array($email, $senha, $tipoUsuario, $ativo, $id));
+        $sql->execute(array($email, $senha, $tipoUsuario, $ativo, $status, $id));
         
         return $sql;
     }
@@ -108,6 +110,7 @@ class usuarioDao {
             $tipoUsuario = $resultado['tipoUsuario'];
             $ativo = $resultado['ativo'];
             $cadastro = $resultado['cadastro'];
+            $status = $resultado['status'];
             
             $usuario->setId($resultado['id']);
             

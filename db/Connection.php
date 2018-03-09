@@ -13,11 +13,9 @@ class Connection
         try {
             
             $conexao = new PDO($dsn, $dbuser, $dbpass);
-            
             $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
             echo "Conectado com Sucesso";
-            
+           
             return $conexao;
             
         } catch (PDOException $e) {

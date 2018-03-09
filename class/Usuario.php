@@ -9,8 +9,8 @@ class Usuario
     private $tipoUsuario;
     private $ativo;
     private $cadastro;
+    private $status;
 
-    
     function __construct($email, $senha, $tipoUsuario, $ativo) {
         echo "<br/>ENTREI NO CONSTRUCT USUARIO";
         $this->email = $email;
@@ -18,12 +18,13 @@ class Usuario
         $this->tipoUsuario = $tipoUsuario;
         $this->ativo = $ativo;
         
+        /*
         echo "<br/>USUARIO";
         var_dump($this->email);
         var_dump($this->senha);
         var_dump($this->tipoUsuario);
         var_dump($this->ativo);
-
+        */
     }
     
     
@@ -58,7 +59,11 @@ class Usuario
     {
         return $this->cadastro;
     }
-
+    
+    public function getStatus()
+    {
+        return $this->status;
+    }
     
     /* Setters */
     
@@ -92,6 +97,10 @@ class Usuario
         $this->cadastro = $cadastro;
     }
     
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
     
     /* Métodos */
     

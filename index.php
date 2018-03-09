@@ -20,7 +20,7 @@ if (isset($_SESSION['id']) && empty($_SESSION['id']) == false) {
 		laborum."
 	</p>
 
-	<a href="register.php" class="btn btn-secondary btn-lg" role="button">Register</a>
+	<a href="user-register.php" class="btn btn-secondary btn-lg" role="button">Register</a>
 
 </div>
 
