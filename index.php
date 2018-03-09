@@ -3,10 +3,10 @@ require_once ("cabecalho.php");
 
 if (isset($_SESSION['id']) && empty($_SESSION['id']) == false) {
     
-    require_once ("");
+    
 } else {
-    ?>
-
+    require_once ("teste.php");?>
+<!-- 
 <div class="starter-template">
 	<h1>CF PickEm</h1>
 	<p class=lead>
@@ -23,7 +23,7 @@ if (isset($_SESSION['id']) && empty($_SESSION['id']) == false) {
 	<a href="user-register.php" class="btn btn-secondary btn-lg" role="button">Register</a>
 
 </div>
-
+ -->
 
 <?php }
 require_once ("rodape.php"); ?>
