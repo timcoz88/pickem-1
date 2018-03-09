@@ -1,6 +1,11 @@
 <?php
 session_start();
 error_reporting(E_ALL ^ E_NOTICE);
+function carregaClasse($nomeDaClasse) {
+    require_once("class/".$nomeDaClasse.".php");
+}
+
+spl_autoload_register("carregaClasse");
 ?>
 <!doctype html>
 <html>
@@ -40,7 +45,6 @@ não comprimir os elementos(o bootstrap que faz)  -->
 				<li class="nav-item"><a class="nav-link"
 					href="index.php">Home</a></li>
                 
-
 
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 					href="#" id="dropdown01" data-toggle="dropdown"
