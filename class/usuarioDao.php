@@ -103,7 +103,7 @@ class usuarioDao {
         if($sql->rowCount()>0) {
             $resultado = $sql->fetch();
             
-            $usuario = new Usuario();
+            
             
             $email = $resultado['email'];
             $senha = $resultado['senha'];
@@ -111,6 +111,8 @@ class usuarioDao {
             $ativo = $resultado['ativo'];
             $cadastro = $resultado['cadastro'];
             $status = $resultado['status'];
+            
+            $usuario = new Usuario($email, $senha, $tipoUsuario, $ativo);
             
             $usuario->setId($resultado['id']);
             
@@ -120,5 +122,40 @@ class usuarioDao {
         
        
     }
+    
+    public function logaUsuario($email, $senha) {
+        
+        var_dump($email);
+        var_dump($senha);
+        
+        $sql = "SELECT * FROM usuarios WHERE email = ? and senha = ?";
+        $sql = $this->conexao->prepare($sql);
+        $sql->execute(array($email, md5($senha)));
+        
+        var_dump($sql);
+        
+        if($sql->rowCount()>0) {
+            $resultado = $sql->fetch();
+            var_dump($resultado);
+            
+            $email = $resultado['email'];
+            $senha = $resultado['senha'];
+            $tipoUsuario = $resultado['tipoUsuario'];
+            $ativo = $resultado['ativo'];
+            $cadastro = $resultado['cadastro'];
+            $status = $resultado['status'];
+            
+            $usuario = new Usuario($email, $senha, $tipoUsuario, $ativo);
+            
+            $usuario->setId($resultado['id']);
+            
+            return $usuario;
+            
+        }
+        
+    }
+    
+    
+    
     
 }

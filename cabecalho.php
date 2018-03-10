@@ -1,11 +1,9 @@
 <?php
 session_start();
 error_reporting(E_ALL ^ E_NOTICE);
-function carregaClasse($nomeDaClasse) {
-    require_once("class/".$nomeDaClasse.".php");
-}
 
-spl_autoload_register("carregaClasse");
+require_once ("class/Usuario.php");
+
 ?>
 <!doctype html>
 <html>
@@ -22,7 +20,8 @@ não comprimir os elementos(o bootstrap que faz)  -->
 <!-- CSS -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
-<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="assets/font-awesome/css/font-awesome.min.css" />
 
 <title>CFPickEm</title>
 </head>
@@ -43,20 +42,17 @@ não comprimir os elementos(o bootstrap que faz)  -->
 		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 			<ul class="navbar-nav mr-auto">
 
-				<li class="nav-item"><a class="nav-link"
-					href="index.php">Home</a></li>
-                
+				<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+
 
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 					href="#" id="dropdown01" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false">PickEm</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown01">
-						<a class="dropdown-item" href="pickem.php">Pick</a> 
-						<a class="dropdown-item" href="mypicks.php">My Picks</a>
-						<a class="dropdown-item" href="leaderboard.php">Leaderboard</a>
-					</div>
-                    
-                </li>
+						<a class="dropdown-item" href="pickem.php">Pick</a> <a
+							class="dropdown-item" href="mypicks.php">My Picks</a> <a
+							class="dropdown-item" href="leaderboard.php">Leaderboard</a>
+					</div></li>
 			</ul>
 			<!--  itens da navbar que ficam a direita -->
 			<ul class="navbar-nav navbar-right">
@@ -69,13 +65,21 @@ não comprimir os elementos(o bootstrap que faz)  -->
 							class="dropdown-item" href="mng-competitions.php">Competitions</a>
 						<a class="dropdown-item" href="mng-events.php">Events</a> <a
 							class="dropdown-item" href="mng-groups.php">Groups</a>
-					</div>
-					
-					</li>
-				<li class="nav-item"><a class="nav-link"
-					href="login.php">Login</a></li>
+					</div></li>
+
+            <!--  Aqui vem o php do email do infeliz -->
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+					href="#" id="dropUser" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false">email@email.com</a>
+					<div class="dropdown-menu" aria-labelledby="dropAdmin">
+						<a class="dropdown-item" href="#">Profile</a> <a
+							class="dropdown-item" href="#">Settings</a> <a
+							class="dropdown-item" href="#">Logout</a>
+					</div></li>
+
+
+
 			</ul>
 		</div>
 	</nav>
-<main role="main" class="container">
-	
+	<main role="main" class="container">

@@ -42,7 +42,7 @@ body {
 	color: #fff;
 }
 
-input[type="text"], input[type="password"], textarea, textarea.form-control
+input[type="text"], input[type="password"], input[type="email"], textarea, textarea.form-control
 	{
 	height: 50px;
 	margin: 0;
