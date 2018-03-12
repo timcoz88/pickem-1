@@ -6,15 +6,19 @@ class Usuario
     private $id;
     private $email;
     private $senha;
+    private $nome;
+    private $sobrenome;
     private $tipoUsuario;
     private $ativo;
     private $cadastro;
     private $status;
 
-    function __construct($email, $senha, $tipoUsuario, $ativo) {
+    function __construct($email, $senha, $nome, $sobrenome, $tipoUsuario, $ativo) {
         echo "<br/>ENTREI NO CONSTRUCT USUARIO";
         $this->email = $email;
         $this->senha = $senha;
+        $this->nome = $nome;
+        $this->sobrenome = $sobrenome;
         $this->tipoUsuario = $tipoUsuario;
         $this->ativo = $ativo;
         
@@ -43,6 +47,17 @@ class Usuario
     public function getSenha()
     {
         return $this->senha;
+    }
+    
+    public function getNome()
+    {
+        return $this->nome;
+    }
+    
+    
+    public function getSobrenome()
+    {
+        return $this->sobrenome;
     }
 
     public function getTipoUsuario()
@@ -81,6 +96,16 @@ class Usuario
     {
         $this->senha = md5($senha);
     }
+    
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+    }
+    
+    public function setSobrenome($sobrenome)
+    {
+        $this->sobrenome = $sobrenome;
+    }
 
     public function setTipoUsuario($tipoUsuario)
     {
@@ -105,6 +130,7 @@ class Usuario
     /* Métodos */
     
 
+  
     
     
 }

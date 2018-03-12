@@ -5,6 +5,7 @@ require_once ("db/Connection.php");
 require_once ("db/banco-usuario.php");
 
 
+
 if (isset($_POST['email']) && empty($_POST['email'] == false)) {
     
     $email = addslashes($_POST['email']);
