@@ -16,7 +16,7 @@ if (isset($_POST['email']) && empty($_POST['email'] == false)) {
     
     $usuarioDao = new usuarioDao($conexao);
     
-    $usuario = $usuarioDao->logaUsuario($email, $senha);
+    $usuario = $usuarioDao->verificaUsuario($email, $senha);
     
     
     if($usuario == null) {
@@ -25,7 +25,7 @@ if (isset($_POST['email']) && empty($_POST['email'] == false)) {
     } else {
         print_r($usuario);
         $_SESSION["success"] = "Usuário logado com sucesso.";
-        mantemUsuario($usuario->getEmail());
+        Session::setSessao($usuario->getEmail());
         header("Location: index.php");
     }
     die();

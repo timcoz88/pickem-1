@@ -14,13 +14,13 @@ class Usuario
     private $status;
 
     function __construct($email, $senha, $nome, $sobrenome, $tipoUsuario, $ativo) {
-        echo "<br/>ENTREI NO CONSTRUCT USUARIO";
+        //echo "<br/>ENTREI NO CONSTRUCT USUARIO";
         $this->email = $email;
         $this->senha = $senha;
         $this->nome = $nome;
         $this->sobrenome = $sobrenome;
         $this->tipoUsuario = $tipoUsuario;
-        $this->ativo = $ativo;
+        $this->ativo = $ativo; //remover, todos irão começar como inativos
         
         /*
         echo "<br/>USUARIO";

@@ -145,7 +145,7 @@ class usuarioDao {
        
     }
     
-    public function logaUsuario($email, $senha) {
+    public function verificaUsuario($email, $senha) {
         
         var_dump($email);
         var_dump($senha);

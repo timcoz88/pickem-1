@@ -1,8 +1,8 @@
 <?php
 session_start();
-error_reporting(E_ALL ^ E_NOTICE);
-
+require_once ("class/Session.php");
 require_once ("class/Usuario.php");
+error_reporting(E_ALL ^ E_NOTICE);
 
 ?>
 <!doctype html>
@@ -70,11 +70,11 @@ não comprimir os elementos(o bootstrap que faz)  -->
             <!--  Aqui vem o php do email do infeliz -->
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 					href="#" id="dropUser" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false">email@email.com</a>
+					aria-expanded="false"><?php echo Session::usuarioLogado();?></a>
 					<div class="dropdown-menu" aria-labelledby="dropAdmin">
 						<a class="dropdown-item" href="#">Profile</a> <a
 							class="dropdown-item" href="#">Settings</a> <a
-							class="dropdown-item" href="#">Logout</a>
+							class="dropdown-item" href="logout.php">Logout</a>
 					</div></li>
 
 
