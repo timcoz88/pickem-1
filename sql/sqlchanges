@@ -1,0 +1,28 @@
+create database cfpickem;
+
+use cfpickem;
+
+create table usuarios (
+	id int(11) not null auto_increment,
+    email varchar(255) not null,
+    senha varchar(255) not null, 
+    tipoUsuario int(1) not null,
+    ativo boolean not null default 1,
+    cadastro datetime not null,
+    primary key (id));
+    
+alter table usuarios add column nome varchar(255) not null;
+alter table usuarios add column sobrenome varchar(255) not null;
+ALTER TABLE usuarios ADD CONSTRAINT UC_email UNIQUE (email);
+
+alter table usuarios add column status int(1) not null default 1;
+
+delete from usuarios where id = 2;
+    
+select * from usuarios;
+
+insert into usuarios (email, senha, tipousuario, ativo, cadastro) values ('usuario@email.com', md5('user123'), 1, true, CURRENT_TIMESTAMP);
+
+insert into usuarios (email, senha, tipousuario, ativo, cadastro) values ('bhsousa@gmail.com', md5('senha123'), 1, true, CURRENT_TIMESTAMP);
+    
+    
