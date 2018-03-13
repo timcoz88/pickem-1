@@ -13,8 +13,9 @@ class Session
     }
 
     // $_SESSION[$key] = $value;
-    public static function setSessao($email)    {
-        $_SESSION["usuario_logado"] = $email;
+    public static function setSessao($key, $value)    {
+        echo "<br/> SETEI a sessão";
+        $_SESSION[$key] = $value;
     }
 
     public static function getSessao($key)    {

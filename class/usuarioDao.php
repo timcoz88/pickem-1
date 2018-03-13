@@ -152,9 +152,10 @@ class usuarioDao {
         
         $sql = "SELECT * FROM usuarios WHERE email = ? and senha = ?";
         $sql = $this->conexao->prepare($sql);
+        var_dump($sql);
         $sql->execute(array($email, md5($senha)));
         
-        var_dump($sql);
+        var_dump($sql->rowCount());
         
         if($sql->rowCount()>0) {
             $resultado = $sql->fetch();
@@ -162,12 +163,14 @@ class usuarioDao {
             
             $email = $resultado['email'];
             $senha = $resultado['senha'];
+            $nome = $resultado['nome'];
+            $sobrenome = $resultado['sobrenome'];
             $tipoUsuario = $resultado['tipoUsuario'];
             $ativo = $resultado['ativo'];
             $cadastro = $resultado['cadastro'];
             $status = $resultado['status'];
             
-            $usuario = new Usuario($email, $senha, $tipoUsuario, $ativo);
+            $usuario = new Usuario($email, $senha, $tipoUsuario, $nome, $sobrenome, $ativo);
             
             $usuario->setId($resultado['id']);
             

@@ -5,9 +5,9 @@ class Connection
 
     public static function getConnection()
     {
-        $dsn = "mysql:dbname=CFPickEM;host=localhost";
-        $dbuser = "root";
-        $dbpass = "root";
+        $dsn = "mysql:dbname=madem561_CFPickEM;host=br112.hostgator.com.br";
+        $dbuser = "madem561_madeRT";
+        $dbpass = "1MAD4jk6_";
 
         
         try {

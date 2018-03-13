@@ -2,6 +2,7 @@
 session_start();
 require_once ("class/Session.php");
 require_once ("class/Usuario.php");
+require_once("mostra-alerta.php");
 error_reporting(E_ALL ^ E_NOTICE);
 
 ?>
@@ -68,6 +69,7 @@ não comprimir os elementos(o bootstrap que faz)  -->
 					</div></li>
 
             <!--  Aqui vem o php do email do infeliz -->
+            <?php if (Session::usuarioLogado()) { ?>
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 					href="#" id="dropUser" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><?php echo Session::usuarioLogado();?></a>
@@ -75,11 +77,17 @@ não comprimir os elementos(o bootstrap que faz)  -->
 						<a class="dropdown-item" href="#">Profile</a> <a
 							class="dropdown-item" href="#">Settings</a> <a
 							class="dropdown-item" href="logout.php">Logout</a>
-					</div></li>
-
+					</div>
+				</li>
+			<?php } else { ?>
+				<li class="nav-item"><a class="nav-link" href="user-login.php">Login</a></li>
+			<?php }?>
 
 
 			</ul>
 		</div>
 	</nav>
 	<main role="main" class="container">
+	<div class="top-content">
+			<?php mostraAlerta("success"); ?>
+			<?php mostraAlerta("danger"); ?>
