@@ -155,19 +155,16 @@ class usuarioDao {
     
     public function verificaUsuario($email, $senha) {
         
-        var_dump($email);
-        var_dump($senha);
-        
         $sql = "SELECT * FROM usuarios WHERE email = ? and senha = ?";
         $sql = $this->conexao->prepare($sql);
-        var_dump($sql);
+        
         $sql->execute(array($email, md5($senha)));
         
-        var_dump($sql->rowCount());
+        
         
         if($sql->rowCount()>0) {
             $resultado = $sql->fetch();
-            var_dump($resultado);
+        
             
             $email = $resultado['email'];
             $senha = $resultado['senha'];

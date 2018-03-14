@@ -6,11 +6,12 @@ class atletaDao {
         $this->conexao = $conexao;
     }
     
-    public function listar() {
+    public static function listar() {
         $atletas = array();
         
         $sql = "SELECT a.id, a.nome, sobrenome, divisao, regiao_id, r.nome AS regiao_nome FROM atletas AS a INNER JOIN regioes AS r ON a.regiao_id = r.id";
-        $sql = $this->conexao->query($sql);
+        $conexao = Conexao::pegarConexao();
+        $sql = $conexao->query($sql);
         $atletas = $sql->fetchAll();
         
         

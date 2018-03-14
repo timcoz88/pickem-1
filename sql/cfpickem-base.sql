@@ -50,10 +50,11 @@ insert into regioes (nome) values
 ('Meridian Regional'),
 ('Pacific Regional');
 
-select * from regiao;
+select * from regioes;
 
 SELECT a.nome, a.sobrenome, r.nome as regiao_nome FROM atletas as a JOIN regioes as r ON a.regiao_id = r.id;
 
+SELECT a.id, a.nome, sobrenome, divisao, regiao_id, r.nome AS regiao_nome FROM atletas AS a INNER JOIN regioes AS r ON a.regiao_id = r.id;
 
 
 

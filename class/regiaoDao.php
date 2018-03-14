@@ -7,7 +7,7 @@ class regiaoDao {
         $this->conexao = $conexao;
     }
     
-    public function listar() {
+    public static function listar() {
         $regioes = array();
         
         $sql = "SELECT * FROM regioes";

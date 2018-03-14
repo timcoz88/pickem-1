@@ -31,13 +31,13 @@ require_once 'global.php';?>
 		</select> <label for="exampleFormControlSelect1">Female Athlete</label> <select
 			class="form-control" id="exampleFormControlSelect1">
 	<?php foreach ($atletas as $atleta): ?>
-			<option value="<?php echo $atleta['id']?>"><?php echo $atleta['nome']?></option>
+			<option value="<?php echo $atleta['id']?>"><?php echo $atleta['nome']." ".$atleta['sobrenome']?></option>
 	<?php endforeach;?>
 
 		</select> <label for="exampleFormControlSelect1">Male Athlete</label> <select
 			class="form-control" id="exampleFormControlSelect1">
 	<?php foreach ($atletas as $atleta): ?>
-			<option value="<?php echo $atleta['id']?>"><?php echo $atleta['nome']?></option>
+			<option value="<?php echo $atleta['id']?>"><?php echo $atleta['nome']." ".$atleta['sobrenome']?></option>
 	<?php endforeach;?>
 
 		</select>
