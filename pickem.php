@@ -1,10 +1,26 @@
-<?php require_once ("cabecalho.php");?>
+<?php require_once ("cabecalho.php");
+require_once 'global.php';?>
+<?php
+    try {
+        $regioes = regiaoDao::listar();
+    } catch (Exception $e) {
+        Erro::trataErro($e);
+    }
+    try {
+        $atletas = atletaDao::listar();
+    } catch (Exception $e) {
+        Erro::trataErro($e);
+    }
+?>
 
 <form action="#" method="post">
 	<div class="form-group">
 		<label for="exampleFormControlSelect1">Competition</label> <select
 			class="form-control" id="exampleFormControlSelect1">
-			<option>Atlantic Regional</option>
+	<?php foreach ($regioes as $regiao): ?>
+			<option value="<?php echo $regiao['id']?>"><?php echo $regiao['nome']?></option>
+	<?php endforeach;?>
+			
 		</select> <label for="exampleFormControlSelect1">Event</label> <select
 			class="form-control" id="exampleFormControlSelect1">
 			<option>Event 1</option>
@@ -14,11 +30,15 @@
 			<option>Event 5</option>
 		</select> <label for="exampleFormControlSelect1">Female Athlete</label> <select
 			class="form-control" id="exampleFormControlSelect1">
-			<option>Name</option>
+	<?php foreach ($atletas as $atleta): ?>
+			<option value="<?php echo $atleta['id']?>"><?php echo $atleta['nome']?></option>
+	<?php endforeach;?>
 
 		</select> <label for="exampleFormControlSelect1">Male Athlete</label> <select
 			class="form-control" id="exampleFormControlSelect1">
-			<option>Name</option>
+	<?php foreach ($atletas as $atleta): ?>
+			<option value="<?php echo $atleta['id']?>"><?php echo $atleta['nome']?></option>
+	<?php endforeach;?>
 
 		</select>
 	</div>

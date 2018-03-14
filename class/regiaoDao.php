@@ -3,16 +3,20 @@
 
 class regiaoDao {
     
-    function __construct() {
-        $this->conexao = Conexao::pegarConexao();
+    function __construct($conexao) {
+        $this->conexao = $conexao;
     }
     
-    function listar() {
+    public function listar() {
         $regioes = array();
         
-        $sql = "SELECT id, nome FROM regioes";
-        $resultado = $conexao->query($sql);
-        $regioes = $resultado->fetchAll();
+        $sql = "SELECT * FROM regioes";
+        $conexao = Conexao::pegarConexao();
+        $sql = $conexao->query($sql);
+        $regioes = $sql->fetchAll();
+        
+        
+        
         
         return $regioes;
     }
@@ -20,8 +24,7 @@ class regiaoDao {
     function inserir() {
         
         
-        $sql = "INSERT INTO regioes (nome) values (?);";
-        $sql = $this->conexao->prepare($sql);
+
         
     }
     

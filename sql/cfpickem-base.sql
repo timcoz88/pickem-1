@@ -23,6 +23,7 @@ create table atletas (
 	id int(11) not null auto_increment,
     nome varchar(255) not null,
     sobrenome varchar(255) not null,
+    divisao int(1) not null,
     regiao_id int(11) not null,
     primary key (id)
 );    
@@ -51,7 +52,7 @@ insert into regioes (nome) values
 
 select * from regiao;
 
-SELECT a.nome, a.sobrenome, r.nome as regiao_nome FROM atletas as a JOIN regiao as r ON a.regiao_id = r.id;
+SELECT a.nome, a.sobrenome, r.nome as regiao_nome FROM atletas as a JOIN regioes as r ON a.regiao_id = r.id;
 
 
 
