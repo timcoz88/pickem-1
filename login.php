@@ -15,7 +15,7 @@ if (isset($_POST['email']) && empty($_POST['email'] == false)) {
     
     $usuarioDao = new usuarioDao();
     
-    $usuario = $usuarioDao->verificaUsuario($email, $senha);
+    $usuario = $usuarioDao->validaUsuario($email, $senha);
     
     
     if($usuario == null) {

@@ -7,7 +7,7 @@ class usuarioDao {
         //echo "<br/> entrei no CONSTRUCT DAO";
     }
     
-    function listar() {
+    public static function listar() {
         
         $usuarios = array();
         
@@ -93,7 +93,7 @@ class usuarioDao {
     }
     
     //CORRIGIR A CLASSE QUANDO FIZER O FORMULÁRIO DE USUÁRIO
-    function alteraUsuario(Usuario $usuario, $id) {
+    function alterar(Usuario $usuario, $id) {
         
         //$id = $usuario->getId();
         $email = $usuario->getEmail();
@@ -112,7 +112,7 @@ class usuarioDao {
         return $sql;
     }
     
-    function removeUsuario($id) {
+    function excluir($id) {
         
         $sql = "delete from produtos where id = ?";
         $sql = $this->conexao->prepare($sql);
@@ -153,7 +153,7 @@ class usuarioDao {
        
     }
     
-    public function verificaUsuario($email, $senha) {
+    public function validaUsuario($email, $senha) {
         
         $sql = "SELECT * FROM usuarios WHERE email = ? and senha = ?";
         $sql = $this->conexao->prepare($sql);
