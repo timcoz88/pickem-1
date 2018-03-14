@@ -3,5 +3,6 @@ session_start();
 require_once ("global.php");
 //Sessao::setSessao("teste@sessao.com");
 
-
-print_r(Sessao::getSessao("usuario_logado"));
+$conexao = Conexao::pegarConexao();
+$regioes = new regiaoDao($conexao);
+print_r($regioes->listar());
