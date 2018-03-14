@@ -15,8 +15,8 @@ try {
     $usuarioDao = new usuarioDao();
     
     
-    if($usuarioDao->insereUsuario($usuario)) {
-        echo "<br/>Usuario criado com sucesso";
+    if($usuarioDao->inserir($usuario)) {
+        Sessao::setSessao("success", "Cadastro realizado com sucesso");
     }
 
     //iniciar sessão

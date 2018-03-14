@@ -48,7 +48,7 @@ class usuarioDao {
         }
         
         
-    public function insereUsuario(Usuario $usuario) {
+    public function inserir(Usuario $usuario) {
         
         $email = $usuario->getEmail();
         $senha = $usuario->getSenha();
