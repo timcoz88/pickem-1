@@ -4,22 +4,20 @@ class Usuario
 {
 
     private $id;
-    private $email;
-    private $senha;
-    private $nome;
-    private $sobrenome;
+    private $emailUsuario;
+    private $senhaUsuario;
+    private $nomeUsuario;
+    private $sobrenomeUsuario;
     private $tipoUsuario;
-    private $ativo;
-    private $cadastro;
-    private $status;
+    private $usuarioAtivo;
+    private $dataCadastro;
+    private $emailValidado;
 
-    function __construct($email, $senha, $nome, $sobrenome, $tipoUsuario, $ativo) {
-        $this->email = $email;
-        $this->senha = $senha;
-        $this->nome = $nome;
-        $this->sobrenome = $sobrenome;
-        $this->tipoUsuario = $tipoUsuario;
-        $this->ativo = $ativo; 
+    function __construct($nomeUsuario, $sobrenomeUsuario, $emailUsuario, $senhaUsuario) {
+        $this->nomeUsuario = $nomeUsuario;
+        $this->sobrenomeUsuario = $sobrenomeUsuario;
+        $this->emailUsuario = $emailUsuario;
+        $this->senhaUsuario = $senhaUsuario;
     }
     
     
@@ -30,25 +28,24 @@ class Usuario
         return $this->id;
     }
 
-    public function getEmail()
+    public function getEmailUsuario()
     {
-        return $this->email;
+        return $this->emailUsuario;
     }
     
-    public function getSenha()
+    public function getSenhaUsuario()
     {
-        return $this->senha;
+        return $this->senhaUsuario;
     }
     
-    public function getNome()
+    public function getNomeUsuario()
     {
-        return $this->nome;
+        return $this->nomeUsuario;
     }
     
-    
-    public function getSobrenome()
+    public function getSobrenomeUsuario()
     {
-        return $this->sobrenome;
+        return $this->sobrenomeUsuario;
     }
 
     public function getTipoUsuario()
@@ -56,46 +53,48 @@ class Usuario
         return $this->tipoUsuario;
     }
 
-    public function getAtivo()
+    public function getEmailValidado()
     {
-        return $this->ativo;
+        return $this->emailValidado;
     }
 
-    public function getCadastro()
+    public function getDataCadastro()
     {
-        return $this->cadastro;
+        return $this->dataCadastro;
     }
     
-    public function getStatus()
+    public function getUsuarioAtivo()
     {
-        return $this->status;
+        return $this->usuarioAtivo;
     }
     
     /* Setters */
     
+    
+
     public function setId($id)
     {
         $this->id = $id;
     }
     
-    public function setEmail($email)
+    public function setEmailUsuario($emailUsuario)
     {
-        $this->email = $email;
+        $this->emailUsuario = $emailUsuario;
     }
 
-    public function setSenha($senha)
+    public function setSenhaUsuario($senhaUsuario)
     {
-        $this->senha = md5($senha);
+        $this->senhaUsuario = md5($senhaUsuario);
     }
     
-    public function setNome($nome)
+    public function setNomeUsuario($nomeUsuario)
     {
-        $this->nome = $nome;
+        $this->nomeUsuario = $nomeUsuario;
     }
     
-    public function setSobrenome($sobrenome)
+    public function setSobrenomeUsuario($sobrenomeUsuario)
     {
-        $this->sobrenome = $sobrenome;
+        $this->sobrenomeUsuario = $sobrenomeUsuario;
     }
 
     public function setTipoUsuario($tipoUsuario)
@@ -103,19 +102,19 @@ class Usuario
         $this->tipoUsuario = $tipoUsuario;
     }
 
-    public function setAtivo($ativo)
+    public function setUsuarioAtivo($usuarioAtivo)
     {
-        $this->ativo = $ativo;
+        $this->usuarioAtivo = $usuarioAtivo;
     }
 
-    public function setCadastro($cadastro)
+    public function setDataCadastro($dataCadastro)
     {
-        $this->cadastro = $cadastro;
+        $this->dataCadastro = $dataCadastro;
     }
     
-    public function setStatus($status)
+    public function setEmailValidado($emailValidado)
     {
-        $this->status = $status;
+        $this->emailValidado = $emailValidado;
     }
     
     /* Métodos */

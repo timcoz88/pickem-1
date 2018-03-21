@@ -11,39 +11,47 @@ require_once 'global.php';?>
     } catch (Exception $e) {
         Erro::trataErro($e);
     }
+    try {
+        $competicoes = competicaoDAO::listar();
+    } catch (Exception $e) {
+        Erro::trataErro($e);
+    }
+    try {
+        $metcon = metconDAO::listar();
+    } catch (Exception $e) {
+        Erro::trataErro($e);
+    }
 ?>
 
-<form action="#" method="post">
+<form action="pickem-post.php" method="post">
 	<div class="form-group">
 		<label for="selectCompetition">Competition</label> <select
 			class="form-control" id="selectCompetition">
 			<option value="" disabled selected hidden>Select Competition...</option>
-	<?php foreach ($regioes as $regiao): ?>
-			<option value="<?php echo $regiao['id']?>"><?php echo $regiao['nome']?></option>
+	<?php foreach ($competicoes as $competicao): ?>
+			<option value="<?php echo $competicao['idCompeticao']?>"><?php echo $competicao['nomeCompeticao']?></option>
 	<?php endforeach;?>
 			
 		</select> <label for="exampleFormControlSelect1">Event</label> <select
 			class="form-control" id="exampleFormControlSelect1">
 			<option value="" disabled selected hidden>Select Event...</option>
-			<option>Event 1</option>
-			<option>Event 2</option>
-			<option>Event 3</option>
-			<option>Event 4</option>
-			<option>Event 5</option>
+	<?php foreach ($metcon as $wod): ?>
+			<option value="<?php echo $wod['idMetcon']?>"><?php echo $wod['nomeMetcon']?></option>
+	<?php endforeach;?>
 		</select> 
 		
 		<label for="exampleFormControlSelect1">Female Athlete</label> <select
 			class="form-control" id="exampleFormControlSelect1">
 			<option value="" disabled selected hidden>Select Female Athlete...</option>
 	<?php foreach ($atletas as $atleta): ?>
-			<option value="<?php echo $atleta['id']?>"><?php echo $atleta['nome']." ".$atleta['sobrenome']?></option>
+			<option value="<?php echo $atleta['idAtleta']?>"><?php echo $atleta['nomeAtleta']." ".$atleta['sobrenomeAtleta']?></option>
 	<?php endforeach;?>
 
 		</select> <label for="exampleFormControlSelect1">Male Athlete</label> <select
 			class="form-control" id="exampleFormControlSelect1">
 			<option value="" disabled selected hidden>Select Male Athlete...</option>
 	<?php foreach ($atletas as $atleta): ?>
-			<option value="<?php echo $atleta['id']?>"><?php echo $atleta['nome']." ".$atleta['sobrenome']?></option>
+			<option value="<?php echo $atleta['idAtleta']?>"><?php echo $atleta['nomeAtleta']." ".$atleta['sobrenomeAtleta']?></option>
 	<?php endforeach;?>
 
 		</select>

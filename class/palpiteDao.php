@@ -1,21 +1,21 @@
 <?php
 
 
-class regiaoDao {
+class palpiteDao {
     
     function __construct($conexao) {
         $this->conexao = $conexao;
     }
     
     public static function listar() {
-        $regioes = array();
+        $palpites = array();
         
-        $sql = "SELECT idRegiao, nomeRegiao FROM regioes";
+        $sql = "SELECT grupos_idUsuario, grupos_idGrupo, resultados_idCompeticao, resultados_idMetcon, resultados_idAtleta FROM palpites";
         $conexao = Conexao::pegarConexao();
         $sql = $conexao->query($sql);
-        $regioes = $sql->fetchAll();
+        $palpites = $sql->fetchAll();
         
-        return $regioes;
+        return $palpites;
     }
     
     function inserir() {

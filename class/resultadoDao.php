@@ -1,21 +1,20 @@
 <?php
 
-
-class regiaoDao {
+class resultadoDao {
     
     function __construct($conexao) {
         $this->conexao = $conexao;
     }
     
     public static function listar() {
-        $regioes = array();
+        $resultados = array();
         
-        $sql = "SELECT idRegiao, nomeRegiao FROM regioes";
+        $sql = "SELECT metcon_idCompeticao, metcon_idMetcon, atletas_idAtleta, classificacao, pontos FROM resultados";
         $conexao = Conexao::pegarConexao();
         $sql = $conexao->query($sql);
-        $regioes = $sql->fetchAll();
+        $resultados = $sql->fetchAll();
         
-        return $regioes;
+        return $resultados;
     }
     
     function inserir() {

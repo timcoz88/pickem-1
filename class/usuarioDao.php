@@ -11,7 +11,7 @@ class usuarioDao {
         
         $usuarios = array();
         
-        $sql = "SELECT id, email, senha, nome, sobrenome, tipoUsuario, ativo, cadastro, status FROM usuarios";
+        $sql = "SELECT idUsuario, nomeusuario, sobrenomeUsuario, emailUsuario, senhaUsuario, dataCadastro, usuarioAtivo, emailValidado, tipoUsuario FROM usuarios";
         $conexao = Conexao::pegarConexao();
         //$resultado = $conexao->query($sql);
         //$lista = $resultado->fetchAll();
@@ -21,26 +21,31 @@ class usuarioDao {
         
         
         while($usuario_array = $sql->fetch()) {
-            $id = $usuario_array['id'];
-            $email = $usuario_array['email'];
-            $senha = $usuario_array['senha'];
-            $nome = $usuario_array['nome'];
-            $sobrenome = $usuario_array['sobrenome'];
+            $idUsuario = $usuario_array['idUsuario'];
+            $nomeUsuario = $usuario_array['nomeusuario'];
+            $sobrenomeUsuario = $usuario_array['sobrenomeUsuario'];
+            $emailUsuario = $usuario_array['emailUsuario'];
+            $senhaUsuario = $usuario_array['senhaUsuario'];
+            $dataCadastro = $usuario_array['dataCadastro'];
+            $usuarioAtivo = $usuario_array['usuarioAtivo'];
+            $emailValidado = $usuario_array['emailValidado'];
             $tipoUsuario = $usuario_array['tipoUsuario'];
-            $ativo = $usuario_array['ativo'];
-            $cadastro = $usuario_array['cadastro'];
-            $status = $usuario_array['status'];
             
-            $usuario = new Usuario($email, $senha, $nome, $sobrenome, $tipoUsuario, $ativo, $cadastro, $status);
+            $usuario = new Usuario($nomeUsuario, $sobrenomeUsuario, $emailUsuario, $senhaUsuario);
             
-            
-            $usuario->setId($id);
+            $usuario->setDataCadastro($dataCadastro);
+            $usuario->setUsuarioAtivo($usuarioAtivo);
+            $usuario->setEmailValidado($emailValidado);
+            $usuario->setTipoUsuario($tipoUsuario);
+            $usuario->setId($idUsuario);
             
             array_push($usuarios, $usuario);
             
+            /*
             echo "<pre>";
             print_r($usuarios);
             echo "</pre>";
+            */
         }
         
         return $usuarios;
@@ -50,12 +55,11 @@ class usuarioDao {
         
     public function inserir(Usuario $usuario) {
         
-        $email = $usuario->getEmail();
-        $senha = $usuario->getSenha();
-        $nome = $usuario->getNome();
-        $sobrenome = $usuario->getSobrenome();
-        $tipoUsuario = $usuario->getTipoUsuario();
-        $ativo = $usuario->getAtivo();
+        $nomeUsuario = $usuario->getNomeUsuario();
+        $sobrenomeUsuario = $usuario->getSobrenomeUsuario();
+        $emailUsuario = $usuario->getEmailUsuario();
+        $senhaUsuario = $usuario->getSenhaUsuario();
+
         
         /*
         echo "<br/>USUARIO DAO";
@@ -65,7 +69,7 @@ class usuarioDao {
         var_dump( $ativo);
         */
      
-        $sql = "INSERT INTO usuarios (email, senha, nome, sobrenome, tipoUsuario, ativo) values (?, ?, ?, ?, ?, ?);";
+        $sql = "INSERT INTO usuarios (nomeUsuario, sobrenomeUsuario, emailUsuario, senhaUsuario) values (?, ?, ?, ?);";
         $sql = $this->conexao->prepare($sql);
         
         /*
@@ -74,7 +78,7 @@ class usuarioDao {
         echo "<br/>-----";
         */
         try {
-            $sql->execute(array($email, $senha, $nome, $sobrenome, $tipoUsuario, $ativo)); 
+            $sql->execute(array($nomeUsuario, $sobrenomeUsuario, $emailUsuario, $senhaUsuario)); 
         } catch (PDOException $e) {
 
             //echo $e->getCode();
@@ -88,33 +92,31 @@ class usuarioDao {
         }
        
         return $sql;
-        
-                
     }
     
     //CORRIGIR A CLASSE QUANDO FIZER O FORMULÁRIO DE USUÁRIO
     function alterar(Usuario $usuario, $id) {
         
         //$id = $usuario->getId();
-        $email = $usuario->getEmail();
-        $senha = $usuario->getSenha();
-        $nome = $usuario->getNome();
-        $sobrenome = $usuario->getSobrenome();
+        $nomeUsuario = $usuario->getNomeUsuario();
+        $sobrenomeUsuario = $usuario->getSobrenomeUsuario();
+        $emailUsuario = $usuario->getEmailUsuario();
+        $senhaUsuario = $usuario->getSenhaUsuario();
         $tipoUsuario = $usuario->getTipoUsuario();
-        $ativo = $usuario->getAtivo();
-        $status = $usuario->getStatus();
+        $usuarioAtivo = $usuario->getUsuarioAtivo();
+        $emailValidado = $usuario->getEmailValidado();
         
         
-        $sql = "UPDATE usuarios SET email = ?, senha = ?, nome = ?, sobrenome = ?, tipoUsuario = ?, ativo = ?  WHERE id = ?";
+        $sql = "UPDATE usuarios SET nomeUsuario = ?, sobrenomeUsuario = ?, emailUsuario = ?, senhaUsuario = ?, tipoUsuario = ?, usuarioAtivo = ?, emailValidado = ?  WHERE id = ?";
         $sql = $this->conexao->prepare($sql);
-        $sql->execute(array($email, $senha, $nome, $sobrenome, $tipoUsuario, $ativo, $id));
+        $sql->execute(array($nomeUsuario, $sobrenomeUsuario, $emailUsuario, $senhaUsuario, $tipoUsuario, $UsuarioAtivo, $emailValidado, $id));
         
         return $sql;
     }
     
     function excluir($id) {
         
-        $sql = "delete from produtos where id = ?";
+        $sql = "delete from usuarios where id = ?";
         $sql = $this->conexao->prepare($sql);
         $sql->execute(array($id));
         
@@ -124,27 +126,33 @@ class usuarioDao {
     function buscaUsuario($id) {
         
         
-        $sql = "SELECT * FROM usuarios WHERE id = ?";
+        $sql = "SELECT idUsuario, nomeusuario, sobrenomeUsuario, emailUsuario, senhaUsuario, dataCadastro, usuarioAtivo, emailValidado, tipoUsuario FROM usuarios WHERE id = ?";
         $sql = $this->conexao->prepare($sql);
         $sql->execute(array($id));
         
         if($sql->rowCount()>0) {
-            $resultado = $sql->fetch();
+            $usuario_array = $sql->fetch();
             
             
+            $idUsuario = $usuario_array['idUsuario'];
+            $nomeUsuario = $usuario_array['nomeusuario'];
+            $sobrenomeUsuario = $usuario_array['sobrenomeUsuario'];
+            $emailUsuario = $usuario_array['emailUsuario'];
+            $senhaUsuario = $usuario_array['senhaUsuario'];
+            $dataCadastro = $usuario_array['dataCadastro'];
+            $usuarioAtivo = $usuario_array['usuarioAtivo'];
+            $emailValidado = $usuario_array['emailValidado'];
+            $tipoUsuario = $usuario_array['tipoUsuario'];
+
             
-            $email = $resultado['email'];
-            $senha = $resultado['senha'];
-            $nome = $resultado['nome'];
-            $sobrenome = $resultado['sobrenome'];
-            $tipoUsuario = $resultado['tipoUsuario'];
-            $ativo = $resultado['ativo'];
-            $cadastro = $resultado['cadastro'];
-            $status = $resultado['status'];
+            $usuario = new Usuario($nomeUsuario, $sobrenomeUsuario, $emailUsuario, $senhaUsuario);
             
-            $usuario = new Usuario($email, $senha, $tipoUsuario, $ativo);
+            $usuario->setDataCadastro($dataCadastro);
+            $usuario->setUsuarioAtivo($usuarioAtivo);
+            $usuario->setEmailValidado($emailValidado);
+            $usuario->setTipoUsuario($tipoUsuario);
+            $usuario->setId($idUsuario);
             
-            $usuario->setId($resultado['id']);
             
             return $usuario;
 
@@ -153,34 +161,19 @@ class usuarioDao {
        
     }
     
-    public function validaUsuario($email, $senha) {
+    public function validaUsuario($emailUsuario, $senhaUsuario) {
         
-        $sql = "SELECT * FROM usuarios WHERE email = ? and senha = ?";
+        $sql = "SELECT idUsuario FROM usuarios WHERE emailUsuario = ? and senhaUsuario = ?";
         $sql = $this->conexao->prepare($sql);
         
-        $sql->execute(array($email, md5($senha)));
+        $sql->execute(array($emailUsuario, md5($senhaUsuario)));
         
         
         
         if($sql->rowCount()>0) {
-            $resultado = $sql->fetch();
-        
-            
-            $email = $resultado['email'];
-            $senha = $resultado['senha'];
-            $nome = $resultado['nome'];
-            $sobrenome = $resultado['sobrenome'];
-            $tipoUsuario = $resultado['tipoUsuario'];
-            $ativo = $resultado['ativo'];
-            $cadastro = $resultado['cadastro'];
-            $status = $resultado['status'];
-            
-            $usuario = new Usuario($email, $senha, $tipoUsuario, $nome, $sobrenome, $ativo);
-            
-            $usuario->setId($resultado['id']);
-            
-            return $usuario;
-            
+            return TRUE;
+        } else {
+            return FALSE;
         }
         
     }

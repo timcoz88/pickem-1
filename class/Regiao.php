@@ -3,31 +3,31 @@
 
 class Regiao {
     
-    private $id;
-    private $nome;
+    private $idRegiao;
+    private $nomeRegiao;
     
-    function __construct($nome) {
-        $this->nome = $nome;
+    function __construct($nomeRegiao) {
+        $this->nomeRegiao = $nomeRegiao;
     }
     
-    public function getId()
+    public function getIdRegiao()
     {
-        return $this->id;
+        return $this->idRegiao;
     }
 
-    public function getNome()
+    public function getNomeRegiao()
     {
-        return $this->nome;
+        return $this->nomeRegiao;
     }
 
-    public function setId($id)
+    public function setIdRegiao($idRegiao)
     {
-        $this->id = $id;
+        $this->idRegiao = $idRegiao;
     }
 
-    public function setNome($nome)
+    public function setNomeRegiao($nomeRegiao)
     {
-        $this->nome = $nome;
+        $this->nomeRegiao = $nomeRegiao;
     }
 
     

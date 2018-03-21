@@ -1,4 +1,4 @@
-INSERT INTO atletas (nome, sobrenome, regiao_id, divisao) VALUES
+INSERT INTO atletas (nomeAtleta, sobrenomeAtleta, regioes_idRegiao, divisaoAtleta) VALUES
 ('JOE', 'SCALI', 5, 1),
 ('RICHARD', 'DESCHAMPS', 5, 1),
 ('MITCH', 'BARNARD', 5, 1),

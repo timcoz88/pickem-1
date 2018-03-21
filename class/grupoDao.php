@@ -1,32 +1,32 @@
 <?php
 
-
-class regiaoDao {
+class grupoDao {
     
     function __construct($conexao) {
         $this->conexao = $conexao;
     }
     
     public static function listar() {
-        $regioes = array();
+        $grupos = array();
         
-        $sql = "SELECT idRegiao, nomeRegiao FROM regioes";
+        $sql = "SELECT idGrupo, nomeGrupo, descricaoGrupo FROM grupos";
         $conexao = Conexao::pegarConexao();
         $sql = $conexao->query($sql);
-        $regioes = $sql->fetchAll();
+        $grupos = $sql->fetchAll();
         
-        return $regioes;
+        return $grupos;
     }
     
-    function inserir() {
+    public function inserir() {
         
-    }
-    
-    function alterar() {
         
     }
     
-    function excluir() {
+    public function alterar() {
+        
+    }
+    
+    public function excluir() {
         
     }
     

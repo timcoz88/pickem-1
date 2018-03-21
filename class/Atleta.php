@@ -3,61 +3,76 @@
 
 class Atleta {
     
-    private $id;
-    private $nome;
-    private $sobrenome;
-    private $divisao;
-    private $regiao;
+    private $idAtleta;
+    private $nomeAtleta;
+    private $sobrenomeAtleta;
+    private $divisaoAtleta;
+    private $regioes_idregiao;
     
-    function __construct($id, $nome, $sobrenome, $divisao, Regiao $regiao ) {
-        $this->id = $id;
-        $this->nome = $nome;
-        $this->sobrenome = $sobrenome;
-        $this->divisao = $divisao;
-        $this->regiao = $regiao;
+    function __construct($idAtleta, $nomeAtleta, $sobrenomeAtleta, $divisaoAtleta, Regiao $regioes_idregiao ) {
+        $this->idAtleta = $idAtleta;
+        $this->nomeAtleta = $nomeAtleta;
+        $this->sobrenomeAtleta = $sobrenomeAtleta;
+        $this->divisaoAtleta = $divisaoAtleta;
+        $this->regioes_idregiao = $regioes_idregiao;
     }
     
-    public function getId()    {
-        return $this->id;
+    
+    /* Getters */
+    
+    public function getIdAtleta()
+    {
+        return $this->idAtleta;
     }
 
-    public function getNome()    {
-        return $this->nome;
+    public function getNomeAtleta()
+    {
+        return $this->nomeAtleta;
     }
 
-    public function getSobrenome()    {
-        return $this->sobrenome;
+    public function getSobrenomeAtleta()
+    {
+        return $this->sobrenomeAtleta;
     }
 
-    public function getDivisao()    {
-        return $this->divisao;
+    public function getDivisaoAtleta()
+    {
+        return $this->divisaoAtleta;
     }
 
-    public function getRegiao()    {
-        return $this->regiao;
+    public function getRegioes_idregiao()
+    {
+        return $this->regioes_idregiao;
     }
 
-    public function setId($id)    {
-        $this->id = $id;
+    /* Setters */
+    
+    public function setIdAtleta($idAtleta)
+    {
+        $this->idAtleta = $idAtleta;
     }
 
-    public function setNome($nome)    {
-        $this->nome = $nome;
+    public function setNomeAtleta($nomeAtleta)
+    {
+        $this->nomeAtleta = $nomeAtleta;
     }
 
-    public function setSobrenome($sobrenome)    {
-        $this->sobrenome = $sobrenome;
+    public function setSobrenomeAtleta($sobrenomeAtleta)
+    {
+        $this->sobrenomeAtleta = $sobrenomeAtleta;
     }
 
-    public function setDivisao($divisao)    {
-        $this->divisao = $divisao;
+    public function setDivisaoAtleta($divisaoAtleta)
+    {
+        $this->divisaoAtleta = $divisaoAtleta;
     }
 
-    public function setRegiao($regiao)    {
-        $this->regiao = $regiao;
+    public function setRegioes_idregiao($regioes_idregiao)
+    {
+        $this->regioes_idregiao = $regioes_idregiao;
     }
 
-
+    /* Métodos */
     
     
     

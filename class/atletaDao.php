@@ -9,22 +9,19 @@ class atletaDao {
     public static function listar() {
         $atletas = array();
         
-        $sql = "SELECT a.id, a.nome, sobrenome, divisao, regiao_id, r.nome AS regiao_nome FROM atletas AS a INNER JOIN regioes AS r ON a.regiao_id = r.id";
+        $sql = "SELECT a.idAtleta, a.nomeAtleta, a.sobrenomeAtleta, a.divisaoAtleta, r.nomeRegiao AS regiao_nome 
+                FROM atletas AS a 
+                INNER JOIN regioes AS r 
+                ON a.regioes_idRegiao = r.idRegiao";
         $conexao = Conexao::pegarConexao();
         $sql = $conexao->query($sql);
         $atletas = $sql->fetchAll();
-        
-        
-        
-        
+
         return $atletas;
     }
     
     function inserir() {
-        
-        
-        $sql = "INSERT INTO regioes (nome) values (?);";
-        $sql = $this->conexao->prepare($sql);
+
         
     }
     
@@ -36,8 +33,19 @@ class atletaDao {
         
     }
     
-    public function listaAtletasParam() {
+    public function listarAtletasParam() {
+        $atletas = array();
         
+        $sql = "SELECT a.idAtleta, a.nomeAtleta, a.sobrenomeAtleta, a.divisaoAtleta, r.nomeRegiao AS regiao_nome
+                FROM atletas AS a
+                INNER JOIN regioes AS r
+                ON a.regioes_idRegiao = r.idRegiao
+                WHERE 1=1";
+        $conexao = Conexao::pegarConexao();
+        $sql = $conexao->query($sql);
+        $atletas = $sql->fetchAll();
+        
+        return $atletas;
     }
     
 }

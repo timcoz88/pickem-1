@@ -1,32 +1,32 @@
 <?php
 
-
-class regiaoDao {
+class metconDAO {
     
     function __construct($conexao) {
         $this->conexao = $conexao;
     }
     
     public static function listar() {
-        $regioes = array();
+        $metcon = array();
         
-        $sql = "SELECT idRegiao, nomeRegiao FROM regioes";
+        $sql = "SELECT idMetcon, nomeMetcon, descricaoMetcon , tipoMetcon FROM metcon";
         $conexao = Conexao::pegarConexao();
         $sql = $conexao->query($sql);
-        $regioes = $sql->fetchAll();
+        $metcon = $sql->fetchAll();
         
-        return $regioes;
+        return $metcon;
     }
     
-    function inserir() {
+    public function inserir() {
         
-    }
-    
-    function alterar() {
         
     }
     
-    function excluir() {
+    public function alterar() {
+        
+    }
+    
+    public function excluir() {
         
     }
     
