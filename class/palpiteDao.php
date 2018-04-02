@@ -3,8 +3,9 @@
 
 class palpiteDao {
     
-    function __construct($conexao) {
-        $this->conexao = $conexao;
+    function __construct() {
+        $this->conexao = Conexao::pegarConexao();
+        //echo "<br/> entrei no CONSTRUCT DAO";
     }
     
     public static function listar() {
@@ -18,7 +19,7 @@ class palpiteDao {
         return $palpites;
     }
     
-    function inserir() {
+    function inserir(Palpite $palpite) {
         
     }
     
