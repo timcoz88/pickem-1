@@ -24,18 +24,23 @@ try {
 } catch (Exception $e) {
     Erro::trataErro($e);
 }
+try {
+    $grupos = grupoDAO::listar();
+} catch (Exception $e) {
+    Erro::trataErro($e);
+}
 ?>
 
 <form action="pickem-post.php" method="post">
 	<div class="form-group">
-	<!-- QUANDO CRIAR AS OPÇÕES DE GRUPOS
+	
 		<label for="selectGroup">Group</label> <select
 			class="form-control" id="selectGroup">
 			<option value="" disabled selected hidden>Select Group...</option>
-	<?php //foreach ($grupos as $grupo): ?>
-			<option value="<?php // echo $grupo['idGrupo']?>"><?php // echo $grupo['nomeGrupo']?></option>
-	<?php //endforeach;?>
-		-->
+	<?php foreach ($grupos as $grupo): ?>
+			<option value="<?php echo $grupo['idGrupo']?>"><?php echo $grupo['nomeGrupo']?></option>
+	<?php endforeach;?>
+		
 		 	
 		</select> <label for="selectCompetition">Competition</label> <select
 			class="form-control" id="selectCompetition">
