@@ -37,11 +37,11 @@ class Sessao
     }
     
     public function usuarioEstaLogado() {
-        return isset($_SESSION["usuario_logado"]);
+        return isset($_SESSION["usuario_email"]);
     }
     
-    public function verificaUsuario() {
-        if(!usuarioEstaLogado()) {
+    public static function verificaUsuario() {
+        if(!self::usuarioEstaLogado()) {
             self::setSessao("danger", "Você não tem acesso a esta funcionalidade.");
             header("Location: index.php");
             die();
@@ -49,7 +49,7 @@ class Sessao
     }
     
     public static function usuarioLogado() {
-        return self::getSessao("usuario_logado");
+        return self::getSessao("usuario_email");
     }
     
     public static function mostraAlerta($tipo) {

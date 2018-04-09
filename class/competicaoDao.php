@@ -30,4 +30,14 @@ class competicaoDAO {
         
     }
     
+    public static function listarAtivas() {
+        $competicoes = array();
+        
+        $sql = "SELECT idCompeticao, nomeCompeticao, descricaoCompeticao, competicaoFinalizada FROM competicoes Where competicaoFinalizada != 1";
+        $conexao = Conexao::pegarConexao();
+        $sql = $conexao->query($sql);
+        $competicoes = $sql->fetchAll();
+        
+        return $competicoes;
+    }
 }

@@ -68,8 +68,9 @@ não comprimir os elementos(o bootstrap que faz)  -->
 				</ul>
 
 				<!--  itens da navbar que ficam a direita -->
-				<!--  Aqui vai verificar se o infeliz é ADMIN -->
 				<ul class="navbar-nav navbar-right">
+				
+<?php if (Sessao::getSessao("usuario_tipo") ==2) { ?>
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 						href="#" id="dropAdmin" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">Admin</a>
@@ -80,7 +81,7 @@ não comprimir os elementos(o bootstrap que faz)  -->
 							<a class="dropdown-item" href="mng-events.php">Events</a> <a
 								class="dropdown-item" href="mng-groups.php">Groups</a>
 						</div></li>
-
+<?php }?>
 					<!--  Aqui vem o php do email do infeliz -->
 
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"

@@ -31,12 +31,16 @@ class usuarioDao {
             $emailValidado = $usuario_array['emailValidado'];
             $tipoUsuario = $usuario_array['tipoUsuario'];
             
-            $usuario = new Usuario($nomeUsuario, $sobrenomeUsuario, $emailUsuario, $senhaUsuario);
+            $usuario = new Usuario();
             
-            $usuario->setDataCadastro($dataCadastro);
-            $usuario->setUsuarioAtivo($usuarioAtivo);
-            $usuario->setEmailValidado($emailValidado);
+            $usuario->setNomeUsuario($nomeUsuario);
+            $usuario->setSobrenomeUsuario($sobrenomeUsuario);
+            $usuario->setEmailUsuario($emailUsuario);
+            $usuario->setSenhaUsuario($senhaUsuario);
             $usuario->setTipoUsuario($tipoUsuario);
+            $usuario->setUsuarioAtivo($usuarioAtivo);
+            $usuario->setDataCadastro($dataCadastro);
+            $usuario->setEmailValidado($emailValidado);
             $usuario->setId($idUsuario);
             
             array_push($usuarios, $usuario);
@@ -60,42 +64,25 @@ class usuarioDao {
         $emailUsuario = $usuario->getEmailUsuario();
         $senhaUsuario = $usuario->getSenhaUsuario();
 
-        
-        /*
-        echo "<br/>USUARIO DAO";
-        var_dump($email);
-        var_dump($senha);
-        var_dump( $tipoUsuario);
-        var_dump( $ativo);
-        */
-     
         $sql = "INSERT INTO usuarios (nomeUsuario, sobrenomeUsuario, emailUsuario, senhaUsuario) values (?, ?, ?, ?);";
         $sql = $this->conexao->prepare($sql);
         
-        /*
-        echo "<br/>SQL";
-        var_dump($sql);
-        echo "<br/>-----";
-        */
+
         try {
             $sql->execute(array($nomeUsuario, $sobrenomeUsuario, $emailUsuario, $senhaUsuario)); 
         } catch (PDOException $e) {
 
-            //echo $e->getCode();
-            //echo $e->getMessage();
-
             if ($e->getCode() == 23000) {
-                Sessao::setSessao("Danger", "Email já cadastrado");
-                //header("Location: index.php");
-                echo "<br/>Email já cadastrado<br/>";
+                Sessao::setSessao("Danger", "Email jÃ¡ cadastrado");
+
             }
         }
        
         return $sql;
     }
     
-    //CORRIGIR A CLASSE QUANDO FIZER O FORMULÁRIO DE USUÁRIO
-    function alterar(Usuario $usuario, $id) {
+    //CORRIGIR A CLASSE QUANDO FIZER O FORMULÃ�RIO DE USUÃ�RIO
+    function alterar(Usuario $usuario, $idUsuario) {
         
         //$id = $usuario->getId();
         $nomeUsuario = $usuario->getNomeUsuario();
@@ -107,28 +94,28 @@ class usuarioDao {
         $emailValidado = $usuario->getEmailValidado();
         
         
-        $sql = "UPDATE usuarios SET nomeUsuario = ?, sobrenomeUsuario = ?, emailUsuario = ?, senhaUsuario = ?, tipoUsuario = ?, usuarioAtivo = ?, emailValidado = ?  WHERE id = ?";
+        $sql = "UPDATE usuarios SET nomeUsuario = ?, sobrenomeUsuario = ?, emailUsuario = ?, senhaUsuario = ?, tipoUsuario = ?, usuarioAtivo = ?, emailValidado = ?  WHERE idUsuario = ?";
         $sql = $this->conexao->prepare($sql);
-        $sql->execute(array($nomeUsuario, $sobrenomeUsuario, $emailUsuario, $senhaUsuario, $tipoUsuario, $UsuarioAtivo, $emailValidado, $id));
+        $sql->execute(array($nomeUsuario, $sobrenomeUsuario, $emailUsuario, $senhaUsuario, $tipoUsuario, $UsuarioAtivo, $emailValidado, $idUsuario));
         
         return $sql;
     }
     
-    function excluir($id) {
+    function excluir($idUsuario) {
         
-        $sql = "delete from usuarios where id = ?";
+        $sql = "delete from usuarios where idUsuario = ?";
         $sql = $this->conexao->prepare($sql);
-        $sql->execute(array($id));
+        $sql->execute(array($idUsuario));
         
         return mysqli_query($this->conexao, $query);
     }
     
-    function buscaUsuario($id) {
+    function buscaUsuario($idUsuario) {
         
         
-        $sql = "SELECT idUsuario, nomeusuario, sobrenomeUsuario, emailUsuario, senhaUsuario, dataCadastro, usuarioAtivo, emailValidado, tipoUsuario FROM usuarios WHERE id = ?";
+        $sql = "SELECT idUsuario, nomeusuario, sobrenomeUsuario, emailUsuario, senhaUsuario, dataCadastro, usuarioAtivo, emailValidado, tipoUsuario FROM usuarios WHERE idUsuario = ?";
         $sql = $this->conexao->prepare($sql);
-        $sql->execute(array($id));
+        $sql->execute(array($idUsuario));
         
         if($sql->rowCount()>0) {
             $usuario_array = $sql->fetch();
@@ -145,13 +132,17 @@ class usuarioDao {
             $tipoUsuario = $usuario_array['tipoUsuario'];
 
             
-            $usuario = new Usuario($nomeUsuario, $sobrenomeUsuario, $emailUsuario, $senhaUsuario);
+            $usuario = new Usuario();
             
-            $usuario->setDataCadastro($dataCadastro);
-            $usuario->setUsuarioAtivo($usuarioAtivo);
-            $usuario->setEmailValidado($emailValidado);
+            $usuario->setNomeUsuario($nomeUsuario);
+            $usuario->setSobrenomeUsuario($sobrenomeUsuario);
+            $usuario->setEmailUsuario($emailUsuario);
+            $usuario->setSenhaUsuario($senhaUsuario);
             $usuario->setTipoUsuario($tipoUsuario);
-            $usuario->setId($idUsuario);
+            $usuario->setUsuarioAtivo($usuarioAtivo);
+            $usuario->setDataCadastro($dataCadastro);
+            $usuario->setEmailValidado($emailValidado);
+            $usuario->setIdUsuario($idUsuario);
             
             
             return $usuario;
@@ -168,10 +159,10 @@ class usuarioDao {
         
         $sql->execute(array($emailUsuario, md5($senhaUsuario)));
         
-        
+        $usuario_array = $sql->fetch();
         
         if($sql->rowCount()>0) {
-            return TRUE;
+            return $usuario_array['idUsuario'];
         } else {
             return FALSE;
         }

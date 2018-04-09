@@ -4,7 +4,7 @@ require_once ("cabecalho.php");
 
 
 
-if (Sessao::getSessao("usuario_logado")) {
+if (Sessao::getSessao("usuario_email")) {
 	require_once ("index-logged.php");
     
 } else {

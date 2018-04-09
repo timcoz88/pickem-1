@@ -13,17 +13,18 @@ class Usuario
     private $dataCadastro;
     private $emailValidado;
 
+    /*
     function __construct($nomeUsuario, $sobrenomeUsuario, $emailUsuario, $senhaUsuario) {
         $this->nomeUsuario = $nomeUsuario;
         $this->sobrenomeUsuario = $sobrenomeUsuario;
         $this->emailUsuario = $emailUsuario;
         $this->senhaUsuario = $senhaUsuario;
     }
-    
+    */
     
     /* Getters */
     
-    public function getId()
+    public function getIdUsuario()
     {
         return $this->id;
     }
@@ -72,7 +73,7 @@ class Usuario
     
     
 
-    public function setId($id)
+    public function setIdUsuario($id)
     {
         $this->id = $id;
     }

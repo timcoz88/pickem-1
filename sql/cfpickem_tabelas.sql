@@ -49,9 +49,10 @@ ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `CFPickEm`.`atletas` (
   `idAtleta` INT(11) NOT NULL AUTO_INCREMENT,
-  `nomeAtleta` VARCHAR(255) NULL,
-  `sobrenomeAtleta` VARCHAR(255) NULL,
-  `divisaoAtleta` TINYINT(1) NULL,
+  `nomeAtleta` VARCHAR(255) NOT NULL,
+  `sobrenomeAtleta` VARCHAR(255) NOT NULL,
+  `profileAtleta` VARCHAR(255),
+  `divisaoAtleta` TINYINT(1) NOT NULL,
   `regioes_idRegiao` INT(11) NOT NULL,
   PRIMARY KEY (`idAtleta`),
   INDEX `idx_atletas_regioes` (`regioes_idRegiao` ASC),
@@ -68,6 +69,7 @@ CREATE TABLE IF NOT EXISTS `CFPickEm`.`competicoes` (
   `nomeCompeticao` VARCHAR(255) NOT NULL,
   `anoCompeticao` SMALLINT(4) NOT NULL,
   `descricaoCompeticao` TEXT NOT NULL,
+  `competicaoFinalizada` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`idCompeticao`))
 ENGINE = InnoDB;
 

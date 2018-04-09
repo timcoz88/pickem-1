@@ -15,12 +15,20 @@ if (isset($_POST['email']) && empty($_POST['email'] == false)) {
     
     $usuarioDao = new usuarioDao();
     
-    
-    
-    if($usuarioDao->validaUsuario($emailUsuario, $senhaUsuario)) {
-        //echo "<br/> validou usuarios";
+    $usuario_id = $usuarioDao->validaUsuario($emailUsuario, $senhaUsuario);
+    print_r($usuario_id);
+    if($usuario_id) {
+        echo "<br/> validou usuarios";
+        $usuario = new Usuario();
+        echo "<br/> validou usuarios";
+        print_r($usuarioDao->buscaUsuario(1));
+        $usuario = $usuarioDao->buscaUsuario($usuario_id);
+        
         Sessao::setSessao("sucess", "Usuário logado com sucesso.");
-        Sessao::setSessao("usuario_logado", $emailUsuario);
+        Sessao::setSessao("usuario_id", $usuario->getIdUsuario());
+        Sessao::setSessao("usuario_email", $usuario->getEmailUsuario());
+        Sessao::setSessao("usuario_tipo", $usuario->getTipoUsuario());
+        
         header("Location: index.php");
         
     } else {
@@ -32,4 +40,6 @@ if (isset($_POST['email']) && empty($_POST['email'] == false)) {
     die();
     
 }
+
+
 

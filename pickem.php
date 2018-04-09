@@ -15,7 +15,7 @@ try {
     Erro::trataErro($e);
 }
 try {
-    $competicoes = competicaoDAO::listar();
+    $competicoes = competicaoDAO::listarAtivas();
 } catch (Exception $e) {
     Erro::trataErro($e);
 }
@@ -31,6 +31,7 @@ try {
 }
 ?>
 
+<h3>Pick</h3>
 <form action="pickem-post.php" method="post">
 	<div class="form-group">
 	
@@ -75,6 +76,32 @@ try {
 
 	<button type="submit" class="btn btn-primary">Pick</button>
 </form>
+<br/>
+<h3>My Picks</h3>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Name</th>
+                    <th class="acao">Edit</th>
+                    <th class="acao">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php //foreach ($lista as $linha): ?>
+                    <tr>
+                        <td><a href="" class="btn btn-link">Event name</a></td>
+                        <td><a href="" class="btn btn-link">Athlete name</a></td>
+                        <td><a href="" class="btn btn-info">Edit</a></td>
+                        <td><a href="" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                <?php //endforeach ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 
 <script>

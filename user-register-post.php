@@ -2,14 +2,22 @@
 require_once ("global.php");
 
 try {
-    $nome = $_POST['nome'];
-    $sobrenome = $_POST['sobrenome'];
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
+    $nomeUsuario = $_POST['nome'];
+    $sobrenomeUsuario = $_POST['sobrenome'];
+    $emailUsuario = $_POST['email'];
+    $senhaUsuario = $_POST['senha'];
     $tipoUsuario = 1;
-    $ativo = 0;
+    $usuarioAtivo = 0;
     
-    $usuario = new Usuario($email, $senha, $nome, $sobrenome, $tipoUsuario, $ativo);
+    $usuario = new Usuario();
+    
+    $usuario->setNomeUsuario($nomeUsuario);
+    $usuario->setSobrenomeUsuario($sobrenomeUsuario);
+    $usuario->setEmailUsuario($emailUsuario);
+    $usuario->setSenhaUsuario($senhaUsuario);
+    $usuario->setTipoUsuario($tipoUsuario);
+    $usuario->setUsuarioAtivo($usuarioAtivo);
+    
     
     //$conexao = Conexao::pegarConexao();
     $usuarioDao = new usuarioDao();
@@ -19,8 +27,8 @@ try {
         Sessao::setSessao("success", "Cadastro realizado com sucesso");
     }
 
-    //iniciar sessão
-    header("Location: index.php");
+    //header para a página de confirmação de email
+    header("Location: user-register-success.php");
 } catch (Exception $e) {
     Erro::trataErro($e);
 }

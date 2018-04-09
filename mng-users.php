@@ -1,4 +1,6 @@
-<?php require_once ("cabecalho.php"); ?>
+<?php require_once ("cabecalho.php"); 
+Sessao::verificaUsuario();
+?>
 
 <div class="starter-template">
 	<h2>Under Construction</h2>

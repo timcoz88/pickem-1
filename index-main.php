@@ -104,12 +104,12 @@
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-password">Password</label> <input
-										type="text" name="senha" placeholder="Password..."
+										type="password" name="senha" placeholder="Password..."
 										class="form-password form-control" id="form-password">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-password-confirm">Confirm
-										password</label> <input type="text"
+										password</label> <input type="password"
 										name="confirma-senha" placeholder="Confirm password"
 										class="form-password-confirm form-control"
 										id="form-password-confirm">
