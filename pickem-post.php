@@ -2,13 +2,22 @@
 require_once ("global.php");
 
 try {
+    $idUsuario = $_POST['idUsuario'];
+    $idGrupo = $_POST['idGrupo'];
     $idCompeticao = $_POST['idCompeticao'];
     $idMetcon = $_POST['idMetcon'];
+    
     $idFemaleAtleta = $_POST['idFemaleAtleta'];
     $idMaleAtleta = $_POST['idMaleAtleta'];
-    $idGrupo = idGrupo;
-    $idUsuario = idGrupo;
     
+    
+    echo "<br/>idusuario: ".$_POST['idUsuario'];
+    echo "<br/>idGrupo: ".$_POST['idGrupo'];
+    echo "<br/>idCompeticao: ".$_POST['idCompeticao'];
+    echo "<br/>idMetcon: ".$_POST['idMetcon'];
+    echo "<br/>idFemaleAtleta: ".$_POST['idFemaleAtleta'];
+    echo "<br/>idMaleAtleta: ".$_POST['idMaleAtleta'];
+
     
     $palpiteFemale = new Palpite($idUsuario, $idGrupo, $idCompeticao, $idMetcon, $idFemaleAtleta);
     $palpiteMale = new Palpite($idUsuario, $idGrupo, $idCompeticao, $idMetcon, $idMaleAtleta);
@@ -23,7 +32,7 @@ try {
     }
     
     //iniciar sessão
-    header("Location: index.php");
+    header("Location: pickem.php");
 } catch (Exception $e) {
     Erro::trataErro($e);
 }

@@ -146,6 +146,8 @@ CREATE TABLE IF NOT EXISTS `CFPickEm`.`resultados` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+
 CREATE TABLE IF NOT EXISTS `CFPickEm`.`palpites` (
   `grupos_idGrupo` INT(11) NOT NULL,
   `grupos_idUsuario` INT(11) NOT NULL,
@@ -159,11 +161,6 @@ CREATE TABLE IF NOT EXISTS `CFPickEm`.`palpites` (
   CONSTRAINT `fk_grupos_has_usuarios_has_competicoes_has_metcon_has_competi1`
     FOREIGN KEY (`grupos_idGrupo` , `grupos_idUsuario`)
     REFERENCES `CFPickEm`.`grupos_has_usuarios` (`grupos_idGrupo` , `usuarios_idUsuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_grupos_has_usuarios_has_competicoes_has_metcon_has_competi2`
-    FOREIGN KEY (`resultados_idCompeticao` , `resultados_idMetcon` , `resultados_cdCompeticao` , `resultados_idAtleta`)
-    REFERENCES `CFPickEm`.`resultados` (`metcon_idCompeticao` , `metcon_idMetcon` , `atletas_idCompeticao` , `atletas_idAtleta`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

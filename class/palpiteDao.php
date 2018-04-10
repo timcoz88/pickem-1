@@ -21,6 +21,23 @@ class palpiteDao {
     
     function inserir(Palpite $palpite) {
         
+        $idUsuario = $palpite->getGrupos_idUsuario();
+        $idGrupo = $palpite->getGrupos_idGrupo();
+        $idCompeticao = $palpite->getResultados_idCompeticao();
+        $idMetcon = $palpite->getResultados_idMetcon();
+        $idAtleta = $palpite->getResultados_idAtleta();
+        
+        $sql = "INSERT INTO palpites (grupos_idGrupo, grupos_idUsuario, resultados_idCompeticao, resultados_idMetcon, resultados_cdCompeticao, resultados_idAtleta) values (?, ?, ?, ?, ?, ?);";
+        $sql = $this->conexao->prepare($sql);
+        
+        
+        try {
+            $sql->execute(array($idGrupo, $idUsuario, $idCompeticao, $idMetcon, $idCompeticao, $idAtleta));
+        } catch (PDOException $e) {
+            Erro::trataErro($e);
+        }
+        
+        return $sql;
     }
     
     function alterar() {
@@ -29,6 +46,19 @@ class palpiteDao {
     
     function excluir() {
         
+    }
+    
+    public static function listarPorUsuario($idUsuario) {
+        $palpites = array();
+        
+        $sql = "SELECT grupos_idUsuario, grupos_idGrupo, resultados_idCompeticao, resultados_idMetcon, resultados_idAtleta FROM palpites WHERE grupos_idUsuario = ?";
+        $conexao = Conexao::pegarConexao();
+        $sql = $this->conexao->prepare($sql);
+        $sql->execute(array($idUsuario));
+        
+        $palpites = $sql->fetchAll();
+        
+        return $palpites;
     }
     
 }

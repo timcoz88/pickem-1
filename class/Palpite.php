@@ -9,7 +9,7 @@ class Palpite {
     private $resultados_idMetcon;
     private $resultados_idAtleta;
     
-    public static function __construct($grupos_idUsuario, $grupos_idGrupo, $resultados_idCompeticao, $resultados_idMetcon, $resultados_idAtleta) {
+    public function __construct($grupos_idUsuario, $grupos_idGrupo, $resultados_idCompeticao, $resultados_idMetcon, $resultados_idAtleta) {
         $this->grupos_idGrupo = $grupos_idGrupo;
         $this->grupos_idUsuario = $grupos_idUsuario;
         $this->resultados_idCompeticao = $resultados_idCompeticao;
