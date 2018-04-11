@@ -51,9 +51,10 @@ class palpiteDao {
     public static function listarPorUsuario($idUsuario) {
         $palpites = array();
         
-        $sql = "SELECT grupos_idUsuario, grupos_idGrupo, resultados_idCompeticao, resultados_idMetcon, resultados_idAtleta FROM palpites WHERE grupos_idUsuario = ?";
+        $sql = "SELECT * FROM palpites_completo WHERE idUsuario = ?";
         $conexao = Conexao::pegarConexao();
-        $sql = $this->conexao->prepare($sql);
+        $sql = $conexao->prepare($sql);
+        //$sql = $this->conexao->prepare($sql);
         $sql->execute(array($idUsuario));
         
         $palpites = $sql->fetchAll();

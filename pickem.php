@@ -14,17 +14,17 @@ try {
     Erro::trataErro($e);
 }
 try {
-    $competicoes = competicaoDAO::listarAtivas();
+    $competicoes = competicaoDao::listarAtivas();
 } catch (Exception $e) {
     Erro::trataErro($e);
 }
 try {
-    $metcon = metconDAO::listar();
+    $metcon = metconDao::listar();
 } catch (Exception $e) {
     Erro::trataErro($e);
 }
 try {
-    $grupos = grupoDAO::listar();
+    $grupos = grupoDao::listar();
 } catch (Exception $e) {
     Erro::trataErro($e);
 }
@@ -99,6 +99,7 @@ try {
 		<table class="table">
 			<thead>
 				<tr>
+					<th>Competition</th>
 					<th>Event</th>
 					<th>Name</th>
 					<th class="acao">Edit</th>
@@ -108,8 +109,9 @@ try {
 			<tbody>
                 <?php foreach ($palpites as $palpite): ?>
                     <tr>
-					<td><a href="" class="btn btn-link"><?php echo $palpite['id'] ?>Event name</a></td>
-					<td><a href="" class="btn btn-link">Athlete name</a></td>
+					<td><a href="" class="btn btn-link"><?php echo $palpite['nomeCompeticao'] ?></a></td>
+					<td><a href="" class="btn btn-link"><?php echo $palpite['nomeMetcon'] ?></a></td>
+					<td><a href="" class="btn btn-link"><?php echo $palpite['nomeAtleta']." ".$palpite['sobrenomeAtleta']  ?></a></td>
 					<td><a href="" class="btn btn-info">Edit</a></td>
 					<td><a href="" class="btn btn-danger">Delete</a></td>
 				</tr>

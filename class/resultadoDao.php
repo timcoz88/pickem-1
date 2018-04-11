@@ -29,4 +29,18 @@ class resultadoDao {
         
     }
     
+    public static function listarPorUsuario() {
+        $palpites = array();
+        
+        $sql = "SELECT * FROM pontos_metcon";
+        $conexao = Conexao::pegarConexao();
+        $sql = $conexao->prepare($sql);
+        //$sql = $this->conexao->prepare($sql);
+        $sql->execute(array($idUsuario));
+        
+        $palpites = $sql->fetchAll();
+        
+        return $palpites;
+    }
+    
 }

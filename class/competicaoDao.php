@@ -1,6 +1,6 @@
 <?php
 
-class competicaoDAO {
+class competicaoDao {
     
     function __construct($conexao) {
         $this->conexao = $conexao;

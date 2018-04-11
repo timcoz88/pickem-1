@@ -18,15 +18,24 @@ select * from metcon;
 
 select * from competicoes_has_metcon;
 
-select * from competicoes_has_atletas;
+select * from competicoes_has_atletas Limit 2000;
 
-select * from resultados;
+select * from resultados limit 5000;
 
 select * from palpites;
+
+select * from pontos_metcon;
 
 select regioes_idRegiao, idAtleta from atletas where regioes_idRegiao =1;
 
 alter table palpites drop foreign key fk_grupos_has_usuarios_has_competicoes_has_metcon_has_competi2;
+
+
+alter table resultados drop foreign key fk_competicoes_has_metcon_has_competicoes_has_atletas_competi1;
+
+
+
+
 
 SELECT a.idAtleta, a.nomeAtleta, a.sobrenomeAtleta, a.divisaoAtleta, r.nomeRegiao AS regiao_nome 
                 FROM atletas AS a 
@@ -42,7 +51,16 @@ join competicoes as c ON p.resultados_idCompeticao = c.idCompeticao)
 join resultados as r ON p.resultados_idCompeticao = r.metcon_idCompeticao AND p.resultados_idMetcon = r.metcon_idMetcon AND p.resultados_idAtleta = r.atletas_idAtleta)
 WHERE p.grupos_idUsuario = 2;
 
-
+select u.idUsuario, u.nomeUsuario, m.idMetcon, m.nomeMetcon ,sum(r.pontos) as PONTOS
+from ((((((palpites as p 
+join grupos as g ON p.grupos_idGrupo = g.idGrupo )
+join usuarios as u ON p.grupos_idUsuario = u.idUsuario) 
+join atletas as a ON p.resultados_idAtleta = a.idAtleta)
+join competicoes as c ON p.resultados_idCompeticao = c.idCompeticao)
+join metcon as m ON p.resultados_idMetcon = m.idMetcon)
+join resultados as r ON p.resultados_idCompeticao = r.metcon_idCompeticao AND p.resultados_idMetcon = r.metcon_idMetcon AND p.resultados_idAtleta = r.atletas_idAtleta) 
+GROUP BY u.nomeUsuario, r.metcon_idMetcon
+;
 
 select u.nomeUsuario, sum(r.pontos) as PONTOS
 from (((((palpites as p 

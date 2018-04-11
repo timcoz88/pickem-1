@@ -1,19 +1,33 @@
-<?php require_once ("cabecalho.php"); ?>
+<?php
+require_once ("global.php");
+require_once ("cabecalho.php");
+try {
+    $competicoes = competicaoDao::listarAtivas();
+} catch (Exception $e) {
+    Erro::trataErro($e);
+}
+try {
+    $metcon = metconDao::listar();
+} catch (Exception $e) {
+    Erro::trataErro($e);
+}
+try {
+    $resultados = resultadoDao::listarPorUsuario();
+} catch (Exception $e) {
+    Erro::trataErro($e);
+}
+?>
 
 
 <div class="form-group">
-	<label for="exampleFormControlSelect1">Competition</label> <select
-		class="form-control" id="exampleFormControlSelect1">
-		<option>Atlantic Regional</option>
-		<option>California Regional</option>
-		<option>Central Regional</option>
-		<option>East</option>
-		<option>Europe</option>
-		<option>South</option>
-		<option>Latin America</option>
-		<option>West</option>
-		<option>Meridional</option>
-	</select>
+<label for="selectCompetition">Competition</label> 
+		<select	class="form-control" name="idCompeticao" id="selectCompetition">
+			<option value="" disabled selected hidden>Select Competition...</option>
+			<option value="">ALL</option>
+	<?php foreach ($competicoes as $competicao): ?>
+			<option value="<?php echo $competicao['idCompeticao']?>"><?php echo $competicao['nomeCompeticao']?></option>
+	<?php endforeach;?>
+		</select> 
 </div>
 
 <div class="table-responsive"> 
@@ -23,17 +37,23 @@
 			<th scope="col">#</th>
 			<th scope="col">Name</th>
 			<th scope="col">Points</th>
-			<th scope="col">Event 1</th>
-			<th scope="col">Event 2</th>
-			<th scope="col">Event 3</th>
-			<th scope="col">Event 4</th>
-			<th scope="col">Event 5</th>
-			<th scope="col">Event 6</th>
+	<?php foreach ($metcon as $wod): ?>
+			<th scope="col" ><?php echo $wod['nomeMetcon']?></option>
+	<?php endforeach;?>
+			
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<th scope="row">1</th>
+	<?php foreach ($resultados as $resultado): 
+	
+	
+	?>
+		<?php foreach ($metcon as $wod): ?>
+			
+	<?php endforeach;?>
+			<th scope="col" ><?php echo $wod['idMetcon']?></option>
 			<td>TEANU RICKARD</td>
 			<td>254</td>
 			<td>27 pts</td>
@@ -42,6 +62,9 @@
 			<td>69 pts</td>
 			<td>24 pts</td>
 			<td>35 pts</td>
+	<?php endforeach;?>
+			
+			
 		</tr>
 		<tr>
 			<th scope="row">2</th>
