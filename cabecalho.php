@@ -22,6 +22,8 @@ não comprimir os elementos(o bootstrap que faz)  -->
 <link rel="stylesheet"
 	href="assets/font-awesome/css/font-awesome.min.css" />
 
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <title>CFPickEm</title>
 </head>
 <body>

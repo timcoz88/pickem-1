@@ -47,6 +47,7 @@
 									class="form-password-confirm form-control"
 									id="form-password-confirm">
 							</div>
+							<div class="g-recaptcha" data-sitekey="6Lfs5VIUAAAAAOM_qFdT1SnAfX5u4kAGSFT-meLy"></div>
 							<button type="submit" class="btn btn-primary">Sign me up!</button>
 						</form>
 					</div>

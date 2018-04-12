@@ -2,10 +2,13 @@
 
 class usuarioDao {
     
+    
     function __construct() {
         $this->conexao = Conexao::pegarConexao();
-        //echo "<br/> entrei no CONSTRUCT DAO";
     }
+    
+ 
+    
     
     public static function listar() {
         
@@ -44,12 +47,7 @@ class usuarioDao {
             $usuario->setId($idUsuario);
             
             array_push($usuarios, $usuario);
-            
-            /*
-            echo "<pre>";
-            print_r($usuarios);
-            echo "</pre>";
-            */
+
         }
         
         return $usuarios;
@@ -58,27 +56,31 @@ class usuarioDao {
         
         
     public function inserir(Usuario $usuario) {
+        $resultado = null;
         
         $nomeUsuario = $usuario->getNomeUsuario();
         $sobrenomeUsuario = $usuario->getSobrenomeUsuario();
         $emailUsuario = $usuario->getEmailUsuario();
         $senhaUsuario = $usuario->getSenhaUsuario();
-
-        $sql = "INSERT INTO usuarios (nomeUsuario, sobrenomeUsuario, emailUsuario, senhaUsuario) values (?, ?, ?, ?);";
-        $sql = $this->conexao->prepare($sql);
+        $dataCadastro = $usuario->getDataCadastro();
         
 
-        try {
-            $sql->execute(array($nomeUsuario, $sobrenomeUsuario, $emailUsuario, $senhaUsuario)); 
-        } catch (PDOException $e) {
+        $sql = "INSERT INTO usuarios (nomeUsuario, sobrenomeUsuario, emailUsuario, senhaUsuario, dataCadastro) values (?, ?, ?, ?, ?);";
+        $sql = $this->conexao->prepare($sql);
 
+        try {
+            $resultado = $sql->execute(array($nomeUsuario, $sobrenomeUsuario, $emailUsuario, $senhaUsuario, $dataCadastro));
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
             if ($e->getCode() == 23000) {
                 Sessao::setSessao("Danger", "Email jÃ¡ cadastrado");
-
+            } else {
+                Sessao::setSessao("Danger", $e->getMessage());
             }
         }
        
-        return $sql;
+        return $resultado;
     }
     
     //CORRIGIR A CLASSE QUANDO FIZER O FORMULÃ�RIO DE USUÃ�RIO
@@ -169,6 +171,22 @@ class usuarioDao {
         
     }
     
+    public function ativaUsuario($idUsuario) {
+        
+        $sql = "UPDATE usuarios SET status = 1 WHERE MD5(idUsuario) = ?";
+        $sql = $this->conexao->prepare($sql);
+        
+        $sql->execute(array($idUsuario));
+        
+        $usuario_array = $sql->fetch();
+        
+        if($sql->rowCount()>0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+        
+    }
     
     
     

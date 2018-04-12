@@ -1,35 +1,62 @@
 <?php
 require_once ("global.php");
+require_once ("login.php");
 
 try {
-    $nomeUsuario = $_POST['nome'];
-    $sobrenomeUsuario = $_POST['sobrenome'];
-    $emailUsuario = $_POST['email'];
-    $senhaUsuario = $_POST['senha'];
-    $tipoUsuario = 1;
-    $usuarioAtivo = 0;
     
-    $usuario = new Usuario();
+    $secret_key = '6Lfs5VIUAAAAAMloVaYo0uYzzZU02nZ81MEReVki';
     
-    $usuario->setNomeUsuario($nomeUsuario);
-    $usuario->setSobrenomeUsuario($sobrenomeUsuario);
-    $usuario->setEmailUsuario($emailUsuario);
-    $usuario->setSenhaUsuario($senhaUsuario);
-    $usuario->setTipoUsuario($tipoUsuario);
-    $usuario->setUsuarioAtivo($usuarioAtivo);
+    // Pego a validação do Captcha feita pelo usuário
+    $recaptcha_response = $_POST['g-recaptcha-response'];
     
-    
-    //$conexao = Conexao::pegarConexao();
-    $usuarioDao = new usuarioDao();
-    
-    
-    if($usuarioDao->inserir($usuario)) {
-        Sessao::setSessao("success", "Cadastro realizado com sucesso");
+    // Verifico se foi feita a postagem do Captcha
+    if (isset($recaptcha_response)) {
+        
+        // Valido se a ação do usuário foi correta junto ao google
+        $answer = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret_key . '&response=' . $_POST['g-recaptcha-response']));
+        
+        // Se a ação do usuário foi correta executo o restante do meu formulário
+        if ($answer->success) {
+            
+            if (isset($_POST['email']) && empty($_POST['email'] == false)) {
+                
+                $emailUsuario = addslashes($_POST['email']);
+                
+                $senhaUsuario = addslashes($_POST['senha']);
+            }
+            
+            $nomeUsuario = $_POST['nome'];
+            $sobrenomeUsuario = $_POST['sobrenome'];
+            
+            $tipoUsuario = 1;
+            $usuarioAtivo = 1;
+            date_default_timezone_set('America/Sao_Paulo');
+            $dataCadastro = date('Y-m-d H:i:s');
+            
+            $usuario = new Usuario();
+            
+            $usuario->setNomeUsuario($nomeUsuario);
+            $usuario->setSobrenomeUsuario($sobrenomeUsuario);
+            $usuario->setEmailUsuario($emailUsuario);
+            $usuario->setSenhaUsuario($senhaUsuario);
+            $usuario->setTipoUsuario($tipoUsuario);
+            $usuario->setUsuarioAtivo($usuarioAtivo);
+            $usuario->setDataCadastro($dataCadastro);
+            
+            // $conexao = Conexao::pegarConexao();
+            $usuarioDao = new usuarioDao();
+            
+            if ($usuarioDao->inserir($usuario)) {
+                logaUsuario($emailUsuario, $senhaUsuario);
+                Sessao::setSessao("success", "Cadastro realizado com sucesso");
+            } else {
+                Sessao::setSessao("danger", "Algum erro na criação");
+                header("Location: user-register.php");
+            }
+        }
+    }else {
+        echo "Por favor faça a verificação do captcha abaixo";
     }
-
-    //header para a página de confirmação de email
-    header("Location: user-register-success.php");
 } catch (Exception $e) {
     Erro::trataErro($e);
 }
-

@@ -1,12 +1,12 @@
-CREATE SCHEMA IF NOT EXISTS `CFPickEm` DEFAULT CHARACTER SET utf8;
+CREATE SCHEMA IF NOT EXISTS `madem561_CFPickEm` DEFAULT CHARACTER SET utf8;
 
-CREATE TABLE IF NOT EXISTS `CFPickEm`.`usuarios` (
+CREATE TABLE IF NOT EXISTS `madem561_CFPickEM`.`usuarios` (
   `idUsuario` INT(11) NOT NULL AUTO_INCREMENT,
   `nomeUsuario` VARCHAR(255) NOT NULL,
   `sobrenomeUsuario` VARCHAR(255) NOT NULL,
   `emailUsuario` VARCHAR(255) NOT NULL,
   `senhaUsuario` VARCHAR(33) NOT NULL,
-  `dataCadastro` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `dataCadastro` DATETIME,
   `usuarioAtivo` TINYINT(1) NOT NULL DEFAULT 1,
   `emailValidado` TINYINT(1) NOT NULL DEFAULT 0,
   `tipoUsuario` INT(11) NOT NULL DEFAULT 1,
@@ -14,14 +14,14 @@ CREATE TABLE IF NOT EXISTS `CFPickEm`.`usuarios` (
   UNIQUE INDEX `emailUsuario_UNIQUE` (`emailUsuario` ASC))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `CFPickEm`.`grupos` (
+CREATE TABLE IF NOT EXISTS `madem561_CFPickEM`.`grupos` (
   `idGrupo` INT(11) NOT NULL AUTO_INCREMENT,
   `nomeGrupo` VARCHAR(255) NOT NULL,
   `descricaoGrupo` TEXT NOT NULL,
   PRIMARY KEY (`idGrupo`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `CFPickEm`.`grupos_has_usuarios` (
+CREATE TABLE IF NOT EXISTS `madem561_CFPickEM`.`grupos_has_usuarios` (
   `grupos_idGrupo` INT(11) NOT NULL,
   `usuarios_idUsuario` INT(11) NOT NULL,
   PRIMARY KEY (`grupos_idGrupo`, `usuarios_idUsuario`),
@@ -29,25 +29,25 @@ CREATE TABLE IF NOT EXISTS `CFPickEm`.`grupos_has_usuarios` (
   INDEX `idx_grupos_has_usuarios_idGrupo` (`grupos_idGrupo` ASC),
   CONSTRAINT `fk_grupos_has_usuarios_grupos1`
     FOREIGN KEY (`grupos_idGrupo`)
-    REFERENCES `CFPickEm`.`grupos` (`idGrupo`)
+    REFERENCES `madem561_CFPickEm`.`grupos` (`idGrupo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_grupos_has_usuarios_usuarios1`
     FOREIGN KEY (`usuarios_idUsuario`)
-    REFERENCES `CFPickEm`.`usuarios` (`idUsuario`)
+    REFERENCES `madem561_CFPickEM`.`usuarios` (`idUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 
-CREATE TABLE IF NOT EXISTS `CFPickEm`.`regioes` (
+CREATE TABLE IF NOT EXISTS `madem561_CFPickEm`.`regioes` (
   `idRegiao` INT(11) NOT NULL AUTO_INCREMENT,
   `nomeRegiao` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`idRegiao`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `CFPickEm`.`atletas` (
+CREATE TABLE IF NOT EXISTS `madem561_CFPickEm`.`atletas` (
   `idAtleta` INT(11) NOT NULL AUTO_INCREMENT,
   `nomeAtleta` VARCHAR(255) NOT NULL,
   `sobrenomeAtleta` VARCHAR(255) NOT NULL,
@@ -58,13 +58,13 @@ CREATE TABLE IF NOT EXISTS `CFPickEm`.`atletas` (
   INDEX `idx_atletas_regioes` (`regioes_idRegiao` ASC),
   CONSTRAINT `fk_atletas_regioes1`
     FOREIGN KEY (`regioes_idRegiao`)
-    REFERENCES `CFPickEm`.`regioes` (`idRegiao`)
+    REFERENCES `madem561_CFPickEm`.`regioes` (`idRegiao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
-CREATE TABLE IF NOT EXISTS `CFPickEm`.`competicoes` (
+CREATE TABLE IF NOT EXISTS `madem561_CFPickEm`.`competicoes` (
   `idCompeticao` INT(11) NOT NULL AUTO_INCREMENT,
   `nomeCompeticao` VARCHAR(255) NOT NULL,
   `anoCompeticao` SMALLINT(4) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `CFPickEm`.`competicoes` (
   PRIMARY KEY (`idCompeticao`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `CFPickEm`.`metcon` (
+CREATE TABLE IF NOT EXISTS `madem561_CFPickEm`.`metcon` (
   `idMetcon` INT(11) NOT NULL AUTO_INCREMENT,
   `nomeMetcon` VARCHAR(255) NOT NULL,
   `descricaoMetcon` TEXT NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `CFPickEm`.`metcon` (
   PRIMARY KEY (`idMetcon`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `CFPickEm`.`competicoes_has_metcon` (
+CREATE TABLE IF NOT EXISTS `madem561_CFPickEm`.`competicoes_has_metcon` (
   `competicoes_idCompeticao` INT(11) NOT NULL,
   `metcon_idMetcon` INT NOT NULL,
   `dataHora_metcon_competicao` DATETIME NOT NULL,
@@ -90,18 +90,18 @@ CREATE TABLE IF NOT EXISTS `CFPickEm`.`competicoes_has_metcon` (
   INDEX `fk_competicoes_has_metcon_competicoes1_idx` (`competicoes_idCompeticao` ASC),
   CONSTRAINT `fk_competicoes_has_metcon_competicoes1`
     FOREIGN KEY (`competicoes_idCompeticao`)
-    REFERENCES `CFPickEm`.`competicoes` (`idCompeticao`)
+    REFERENCES `madem561_CFPickEm`.`competicoes` (`idCompeticao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_competicoes_has_metcon_metcon1`
     FOREIGN KEY (`metcon_idMetcon`)
-    REFERENCES `CFPickEm`.`metcon` (`idMetcon`)
+    REFERENCES `madem561_CFPickEm`.`metcon` (`idMetcon`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
-CREATE TABLE IF NOT EXISTS `CFPickEm`.`competicoes_has_atletas` (
+CREATE TABLE IF NOT EXISTS `madem561_CFPickEm`.`competicoes_has_atletas` (
   `competicoes_idCompeticao` INT(11) NOT NULL,
   `atletas_idAtleta` INT(11) NOT NULL,
   PRIMARY KEY (`competicoes_idCompeticao`, `atletas_idAtleta`),
@@ -109,12 +109,12 @@ CREATE TABLE IF NOT EXISTS `CFPickEm`.`competicoes_has_atletas` (
   INDEX `fk_competicoes_has_atletas_competicoes1_idx` (`competicoes_idCompeticao` ASC),
   CONSTRAINT `fk_competicoes_has_atletas_competicoes1`
     FOREIGN KEY (`competicoes_idCompeticao`)
-    REFERENCES `CFPickEm`.`competicoes` (`idCompeticao`)
+    REFERENCES `madem561_CFPickEm`.`competicoes` (`idCompeticao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_competicoes_has_atletas_atletas1`
     FOREIGN KEY (`atletas_idAtleta`)
-    REFERENCES `CFPickEm`.`atletas` (`idAtleta`)
+    REFERENCES `madem561_CFPickEm`.`atletas` (`idAtleta`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -124,7 +124,7 @@ ENGINE = InnoDB;
 
 
 
-CREATE TABLE IF NOT EXISTS `CFPickEm`.`resultados` (
+CREATE TABLE IF NOT EXISTS `madem561_CFPickEm`.`resultados` (
   `metcon_idCompeticao` INT(11) NOT NULL,
   `metcon_idMetcon` INT(11) NOT NULL,
   `atletas_idCompeticao` INT(11) NOT NULL,
@@ -136,19 +136,19 @@ CREATE TABLE IF NOT EXISTS `CFPickEm`.`resultados` (
   INDEX `fk_competicoes_has_metcon_has_competicoes_has_atletas_compe_idx1` (`metcon_idCompeticao` ASC, `metcon_idMetcon` ASC),
   CONSTRAINT `fk_competicoes_has_metcon_has_competicoes_has_atletas_competi1`
     FOREIGN KEY (`metcon_idCompeticao` , `metcon_idMetcon`)
-    REFERENCES `CFPickEm`.`competicoes_has_metcon` (`competicoes_idCompeticao` , `metcon_idMetcon`)
+    REFERENCES `madem561_CFPickEm`.`competicoes_has_metcon` (`competicoes_idCompeticao` , `metcon_idMetcon`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_competicoes_has_metcon_has_competicoes_has_atletas_competi2`
     FOREIGN KEY (`atletas_idCompeticao` , `atletas_idAtleta`)
-    REFERENCES `CFPickEm`.`competicoes_has_atletas` (`competicoes_idCompeticao` , `atletas_idAtleta`)
+    REFERENCES `madem561_CFPickEm`.`competicoes_has_atletas` (`competicoes_idCompeticao` , `atletas_idAtleta`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 
-CREATE TABLE IF NOT EXISTS `CFPickEm`.`palpites` (
+CREATE TABLE IF NOT EXISTS `madem561_CFPickEm`.`palpites` (
   `grupos_idGrupo` INT(11) NOT NULL,
   `grupos_idUsuario` INT(11) NOT NULL,
   `resultados_idCompeticao` INT(11) NOT NULL,
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `CFPickEm`.`palpites` (
   INDEX `fk_grupos_has_usuarios_has_competicoes_has_metcon_has_compe_idx1` (`grupos_idGrupo` ASC, `grupos_idUsuario` ASC),
   CONSTRAINT `fk_grupos_has_usuarios_has_competicoes_has_metcon_has_competi1`
     FOREIGN KEY (`grupos_idGrupo` , `grupos_idUsuario`)
-    REFERENCES `CFPickEm`.`grupos_has_usuarios` (`grupos_idGrupo` , `usuarios_idUsuario`)
+    REFERENCES `madem561_CFPickEm`.`grupos_has_usuarios` (`grupos_idGrupo` , `usuarios_idUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

@@ -46,15 +46,12 @@ try {
 	<tbody>
 		<tr>
 			<th scope="row">1</th>
-	<?php foreach ($resultados as $resultado): 
-	
-	
-	?>
+	<?php foreach ($resultados as $resultado):?>
 		<?php foreach ($metcon as $wod): ?>
-			
-	<?php endforeach;?>
+			s
+		<?php endforeach;?>
 			<th scope="col" ><?php echo $wod['idMetcon']?></option>
-			<td>TEANU RICKARD</td>
+			<td></td>
 			<td>254</td>
 			<td>27 pts</td>
 			<td>75 pts</td>
