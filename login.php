@@ -7,12 +7,12 @@ if (isset($_POST['email']) && empty($_POST['email'] == false)) {
     $emailUsuario = addslashes($_POST['email']);
     
     $senhaUsuario = addslashes($_POST['senha']);
+    
+    logaUsuario($emailUsuario, $senhaUsuario);
 }
 
 
 function logaUsuario($emailUsuario, $senhaUsuario) {
-
-
     
     $usuarioDao = new usuarioDao();
     

@@ -113,3 +113,4 @@ não comprimir os elementos(o bootstrap que faz)  -->
 			<div class="container">
 			<?php Sessao::mostraAlerta("success"); ?>
 			<?php Sessao::mostraAlerta("danger"); ?>
+			

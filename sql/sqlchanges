@@ -14,6 +14,8 @@ create table usuarios (
 alter table usuarios add column nome varchar(255) not null;
 alter table usuarios add column sobrenome varchar(255) not null;
 ALTER TABLE usuarios ADD CONSTRAINT UC_email UNIQUE (email);
+alter table usuarios alter dataCadastro drop default;
+alter table usuarios modify dataCadastro DATETIME;
 
 alter table competicoes add column competicaoFinalizada TINYINT(1) NOT NULL DEFAULT 0;
 alter table atletas add column profileAtleta VARCHAR(255);

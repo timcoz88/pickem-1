@@ -48,7 +48,7 @@ try {
 			<th scope="row">1</th>
 	<?php foreach ($resultados as $resultado):?>
 		<?php foreach ($metcon as $wod): ?>
-			s
+			
 		<?php endforeach;?>
 			<th scope="col" ><?php echo $wod['idMetcon']?></option>
 			<td></td>
