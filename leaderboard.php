@@ -12,7 +12,7 @@ try {
     Erro::trataErro($e);
 }
 try {
-    $resultados = resultadoDao::listarPorUsuario();
+    $resultados = resultadoDao::classificacao();
 } catch (Exception $e) {
     Erro::trataErro($e);
 }
@@ -45,20 +45,21 @@ try {
 	</thead>
 	<tbody>
 		<tr>
-			<th scope="row">1</th>
-	<?php foreach ($resultados as $resultado):?>
-		<?php foreach ($metcon as $wod): ?>
 			
-		<?php endforeach;?>
-			<th scope="col" ><?php echo $wod['idMetcon']?></option>
-			<td></td>
-			<td>254</td>
-			<td>27 pts</td>
-			<td>75 pts</td>
-			<td>24 pts</td>
-			<td>69 pts</td>
-			<td>24 pts</td>
-			<td>35 pts</td>
+	<?php foreach ($resultados as $resultado):
+	$i = 1;?>
+			<th scope="row"><?php echo $i?></th>
+			<th scope="col" ><?php echo $resultado['nomeUsuario']." ".$resultado['sobrenomeUsuario']?></option>
+			<th scope="col" >TOTAL</option>
+		<?php foreach ($metcon as $wod): ?>
+			<td><?php 
+			
+			echo $resultado[$wod['idMetcon']];
+			     ?>
+			</td>
+		<?php endforeach; $i = $i +1;?>
+			
+			
 	<?php endforeach;?>
 			
 			

@@ -26,6 +26,9 @@ select * from palpites;
 
 select * from pontos_metcon;
 
+select * from pontos_metcon_usuario;
+select * from pontos_metcon_history;
+
 select regioes_idRegiao, idAtleta from atletas where regioes_idRegiao =1;
 
 alter table palpites drop foreign key fk_grupos_has_usuarios_has_competicoes_has_metcon_has_competi2;
@@ -34,7 +37,37 @@ alter table palpites drop foreign key fk_grupos_has_usuarios_has_competicoes_has
 alter table resultados drop foreign key fk_competicoes_has_metcon_has_competicoes_has_atletas_competi1;
 
 
+SELECT   
+		u.idUsuario, m.idMetcon, sum(r.pontos) as PONTOS
+	FROM
+		 ((((((palpites as p 
+		join grupos as g ON p.grupos_idGrupo = g.idGrupo )
+		join usuarios as u ON p.grupos_idUsuario = u.idUsuario) 
+		join atletas as a ON p.resultados_idAtleta = a.idAtleta)
+		join competicoes as c ON p.resultados_idCompeticao = c.idCompeticao)
+		join metcon as m ON p.resultados_idMetcon = m.idMetcon)
+		join resultados as r ON p.resultados_idCompeticao = r.metcon_idCompeticao AND p.resultados_idMetcon = r.metcon_idMetcon AND p.resultados_idAtleta = r.atletas_idAtleta) 
+	GROUP BY u.nomeUsuario, r.metcon_idMetcon
+;
 
+select pontos_metcon.*,
+	case when idmetcon = 1 then PONTOS end as A,
+    case when idmetcon = 2 then PONTOS end as B,
+    case when idmetcon = 3 then PONTOS end as C,
+    case when idmetcon = 4 then PONTOS end as D,
+    case when idmetcon = 5 then PONTOS end as E,
+    case when idmetcon = 6 then PONTOS end as F
+    FROM pontos_metcon;
+    
+    select idUsuario,
+    sum(A) as A,
+    sum(B) as B,
+    sum(C) as C,
+    sum(D) as D,
+    sum(E) as E,
+    sum(F) as F
+    FROM pontos_metcon_history
+    group by idUsuario;
 
 
 SELECT a.idAtleta, a.nomeAtleta, a.sobrenomeAtleta, a.divisaoAtleta, r.nomeRegiao AS regiao_nome 
@@ -143,18 +176,14 @@ insert into metcon (nomeMetcon, descricaoMetcon, tipoMetcon) values
 30 / 25 cal. bike
 20 burpee box jump-overs
 10 sandbag cleans
-
 Men use a 30-in. box and a 150-lb. bag
 Women use a 24-in. box and a 100-lb. bag
-
 Time cap: 6 minutes', 'For Time'),
 ('Regionals 2017 Event 2', '21-15-9 reps for time of:
 Muscle-ups
 Single-arm overhead squats
-
 Men use an 80-lb. dumbbell
 Women use a 55-lb. dumbbell
-
 Time cap: 11 minutes', 'For Time'),
 ('Regionals 2017 Event 3', 'For time:
 100-ft. dumbbell overhead walking lunge
@@ -164,10 +193,8 @@ Time cap: 11 minutes', 'For Time'),
 50 wall-ball shots
 100 double-unders
 100-ft. dumbbell overhead walking lunge
-
 Men use an 80-lb. dumbbell and 30-lb. ball.
 Women use a 55-lb. dumbbell and 20-lb. ball.
-
 Time cap: 16 minutes', 'For Time'),
 ('Regionals 2017 Event 4', 'For time:
 60-ft. handstand walk
@@ -182,18 +209,14 @@ Time cap: 16 minutes', 'For Time'),
 60-ft. handstand walk
 16 toes-to-bars
 16 double kettlebell deadlifts
-
 Men use two 150-lb. kettlebells
 Women use two 106-lb. kettlebells
-
 Time cap: 11 minutes', 'For Time'),
 ('Regionals 2017 Event 5', '21-15-9 reps for time of:
 Dumbbell snatches
 Ring dips
-
 Men use an 80-lb. dumbbell
 Women use a 55-lb. dumbbell
-
 Time cap: 6 minutes', 'For Time'),
 ('Regionals 2017 Event 6', 'For time, wearing a weight vest:
 1,200-m run
@@ -201,10 +224,8 @@ Then, 12 rounds of:
   4 strict handstand push-ups
   8 chest-to-bar pull-ups
   12 squats
-
 Men wear a 20-lb. vest
 Women wear a 14-lb. vest
-
 Time cap: 25 minutes', 'For Time');
 
 insert into metcon (nomeMetcon, descricaoMetcon, tipoMetcon) values

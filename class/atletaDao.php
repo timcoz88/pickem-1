@@ -12,7 +12,8 @@ class atletaDao {
         $sql = "SELECT a.idAtleta, a.nomeAtleta, a.sobrenomeAtleta, a.divisaoAtleta, r.nomeRegiao AS regiao_nome 
                 FROM atletas AS a 
                 INNER JOIN regioes AS r 
-                ON a.regioes_idRegiao = r.idRegiao";
+                ON a.regioes_idRegiao = r.idRegiao
+                ORDER BY a.nomeAtleta, a.sobrenomeAtleta";
         $conexao = Conexao::pegarConexao();
         $sql = $conexao->query($sql);
         $atletas = $sql->fetchAll();
@@ -76,6 +77,24 @@ class atletaDao {
         $atletas = $sql->fetchAll();
         
         return $atletas;
+    }
+    
+    public function buscaPorId(String $idAtleta) {
+        
+        
+        $sql = "SELECT a.idAtleta, a.nomeAtleta, a.sobrenomeAtleta, a.divisaoAtleta, r.nomeRegiao AS regiao_nome
+                FROM atletas AS a
+                INNER JOIN regioes AS r
+                ON a.regioes_idRegiao = r.idRegiao
+                WHERE a.idAtleta = ?";
+        $conexao = Conexao::pegarConexao();
+        $sql = $conexao->prepare($sql);
+        
+        $sql->execute($idAtleta);
+        
+        $atleta = $sql->fetch();
+        
+        return $atleta;
     }
     
 }

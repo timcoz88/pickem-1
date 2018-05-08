@@ -19,13 +19,13 @@ VIEW `cfpickem`.`classificacao_geral` AS
     ORDER BY `PONTOS` DESC;
     
     
-CREATE 
+CREATE OR replace 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
 VIEW `cfpickem`.`pontos_metcon` AS
     SELECT   
-		u.idUsuario, u.nomeUsuario, m.idMetcon, m.nomeMetcon ,sum(r.pontos) as PONTOS
+		u.idUsuario, u.nomeUsuario, u.sobrenomeUsuario, m.idMetcon, m.nomeMetcon ,sum(r.pontos) as PONTOS
 	FROM
 		 ((((((palpites as p 
 		join grupos as g ON p.grupos_idGrupo = g.idGrupo )
@@ -36,6 +36,51 @@ VIEW `cfpickem`.`pontos_metcon` AS
 		join resultados as r ON p.resultados_idCompeticao = r.metcon_idCompeticao AND p.resultados_idMetcon = r.metcon_idMetcon AND p.resultados_idAtleta = r.atletas_idAtleta) 
 	GROUP BY u.nomeUsuario, r.metcon_idMetcon
 ;
+
+CREATE OR replace
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `cfpickem`.`pontos_metcon_history` AS
+select pontos_metcon.*,
+	case when idmetcon = 1 then PONTOS end as A,
+    case when idmetcon = 2 then PONTOS end as B,
+    case when idmetcon = 3 then PONTOS end as C,
+    case when idmetcon = 4 then PONTOS end as D,
+    case when idmetcon = 5 then PONTOS end as E,
+    case when idmetcon = 6 then PONTOS end as F
+    FROM pontos_metcon;
+    
+    
+  CREATE OR replace 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `cfpickem`.`pontos_metcon_usuario` AS  
+    select idUsuario, nomeUsuario, sobrenomeUsuario,
+    sum(A) as A,
+    sum(B) as B,
+    sum(C) as C,
+    sum(D) as D,
+    sum(E) as E,
+    sum(F) as F
+    FROM pontos_metcon_history
+    group by idUsuario;
+    
+      CREATE OR replace 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `cfpickem`.`pontos_metcon_usuario` AS  
+    select idUsuario,
+    sum(A) as A,
+    sum(B) as B,
+    sum(C) as C,
+    sum(D) as D,
+    sum(E) as E,
+    sum(F) as F
+    FROM pontos_metcon_history
+    group by idUsuario;
 
 CREATE OR REPLACE VIEW `palpites_completo` AS
 select g.idGrupo, g.nomeGrupo, u.idUsuario, u.nomeUsuario, c.idCompeticao, c.competicaoFinalizada, c.nomeCompeticao, m.idMetcon, m.nomeMetcon, a.idAtleta, a.nomeAtleta, a.sobrenomeAtleta, a.divisaoAtleta

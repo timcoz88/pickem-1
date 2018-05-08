@@ -8,8 +8,7 @@ try {
     Erro::trataErro($e);
 }
 try {
-    $femaleAtletas = atletaDao::listarFemale();
-    $maleAtletas = atletaDao::listarMale();
+    $atletas = atletaDao::listar();
 } catch (Exception $e) {
     Erro::trataErro($e);
 }
@@ -69,21 +68,21 @@ try {
 	<?php endforeach;?>
 		</select>
 		
-		<label for="exampleFormControlSelect1">Female Athlete</label>
-		<select class="form-control" name="idFemaleAtleta"
+		<label for="exampleFormControlSelect1">Division</label>
+		<select class="form-control" name="idDivisao"
 			id="exampleFormControlSelect1">
-			<option value="" disabled selected hidden>Select Female Athlete...</option>
-	<?php foreach ($femaleAtletas as $femaleAtleta): ?>
-			<option value="<?php echo $femaleAtleta['idAtleta']?>"><?php echo $femaleAtleta['nomeAtleta']." ".$femaleAtleta['sobrenomeAtleta']?></option>
-	<?php endforeach;?>
+			<option value="" disabled selected hidden>Select Division...</option>
+			<option value="0">Female</option>
+			<option value="1">Male</option>
+	
 		</select>
 		
-		<label for="exampleFormControlSelect1">Male Athlete</label>
-		<select class="form-control" name="idMaleAtleta"
+		<label for="exampleFormControlSelect1">Athlete</label>
+		<select class="form-control" name="idAtleta"
 			id="exampleFormControlSelect1">
-			<option value="" disabled selected hidden>Select Male Athlete...</option>
-	<?php foreach ($maleAtletas as $maleAtleta): ?>
-			<option value="<?php echo $maleAtleta['idAtleta']?>"><?php echo $maleAtleta['nomeAtleta']." ".$maleAtleta['sobrenomeAtleta']?></option>
+			<option value="" disabled selected hidden>Select Athlete...</option>
+	<?php foreach ($atletas as $atleta): ?>
+			<option value="<?php echo $atleta['idAtleta']?>"><?php echo $atleta['nomeAtleta']." ".$atleta['sobrenomeAtleta']?></option>
 	<?php endforeach;?>
 		</select>
 		

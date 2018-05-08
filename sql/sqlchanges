@@ -31,3 +31,21 @@ insert into usuarios (email, senha, tipousuario, ativo, cadastro) values ('usuar
 insert into usuarios (email, senha, tipousuario, ativo, cadastro) values ('bhsousa@gmail.com', md5('senha123'), 1, true, CURRENT_TIMESTAMP);
     
     
+SET @sql = NULL;
+SELECT
+	GROUP_CONCAT(distinct
+    CONCAT(
+      'ifnull(SUM(case when nomeMetcon = ''',
+      nomeMetcon,
+      ''' then PONTOS end),0) AS `',
+      nomeMetcon, '`'
+    )
+    ) INTO @sql
+    FROM pontos_metcon;
+    SET @sql = CONCAT('SELECT idUsuario, nomeUsuario, sobrenomeUsuario, ', @sql, ' FROM pontos_metcon GROUP BY idUsuario');
+    PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+
+call classificacao_por_wod;

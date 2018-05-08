@@ -1,37 +1,32 @@
 <?php
 require_once ("global.php");
-
+session_start();
 try {
     $idUsuario = $_POST['idUsuario'];
     $idGrupo = $_POST['idGrupo'];
     $idCompeticao = $_POST['idCompeticao'];
     $idMetcon = $_POST['idMetcon'];
-    
-    $idFemaleAtleta = $_POST['idFemaleAtleta'];
-    $idMaleAtleta = $_POST['idMaleAtleta'];
-    
-    
-    echo "<br/>idusuario: ".$_POST['idUsuario'];
-    echo "<br/>idGrupo: ".$_POST['idGrupo'];
-    echo "<br/>idCompeticao: ".$_POST['idCompeticao'];
-    echo "<br/>idMetcon: ".$_POST['idMetcon'];
-    echo "<br/>idFemaleAtleta: ".$_POST['idFemaleAtleta'];
-    echo "<br/>idMaleAtleta: ".$_POST['idMaleAtleta'];
+    $idAtleta = $_POST['idAtleta'];
 
     
-    $palpiteFemale = new Palpite($idUsuario, $idGrupo, $idCompeticao, $idMetcon, $idFemaleAtleta);
-    $palpiteMale = new Palpite($idUsuario, $idGrupo, $idCompeticao, $idMetcon, $idMaleAtleta);
+    $palpite = new Palpite($idUsuario, $idGrupo, $idCompeticao, $idMetcon, $idAtleta);
     
-    //$conexao = Conexao::pegarConexao();
+    
+    // $conexao = Conexao::pegarConexao();
     $palpiteDao = new palpiteDao();
     
-    //verificar se tem algum em branco e inserir
+    // verificar se tem algum em branco e inserir
     
-    if($palpiteDao->inserir($palpiteFemale) && $palpiteDao->inserir($palpiteMale)) {
-        Sessao::setSessao("success", "Palpite realizado com sucesso");
+    if ($motivo = $palpiteDao->verificaPalpite($palpite)) {
+        print_r($motivo);
+        Sessao::setSessao("danger", $motivo);
+    } else {
+        if ($palpiteDao->inserir($palpite)) {
+            Sessao::setSessao("success", "Palpite realizado com sucesso");
+        }
     }
     
-    //iniciar sessão
+    // iniciar sessão
     header("Location: pickem.php");
 } catch (Exception $e) {
     Erro::trataErro($e);

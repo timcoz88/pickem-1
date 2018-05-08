@@ -36,11 +36,32 @@ class resultadoDao {
         $conexao = Conexao::pegarConexao();
         $sql = $conexao->prepare($sql);
         //$sql = $this->conexao->prepare($sql);
-        $sql->execute(array($idUsuario));
+        $sql->execute();
+        
+        $palpites = $sql->fetchAll();
+        
+       
+        
+        
+        return $palpites;
+    }
+    
+    public static function classificacao() {
+        $palpites = array();
+        //print_r($palpites);
+        
+        $sql = "CALL classificacao_por_wod";
+        //print_r($sql);
+        $conexao = Conexao::pegarConexao();
+        //$sql = $conexao->prepare($sql);
+        //$sql = $this->conexao->prepare($sql);
+        $sql = $conexao->query($sql);
+        
+        $sql->setFetchMode($conexao::FETCH_ASSOC);
+        
         
         $palpites = $sql->fetchAll();
         
         return $palpites;
     }
-    
 }
